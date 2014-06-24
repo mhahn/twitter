@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Michael Hahn. All rights reserved.
 //
 
+#import "Tweet.h"
 #import "TwitterClient.h"
 #import "TwitterManager.h"
 
@@ -33,19 +34,52 @@
     [self.client authorizeClient:url];
 }
 
+- (void)signOut {
+    // ideally this would return a signal too, but not sure what to do about RACDisposable with no cancel operation
+    [self.client.requestSerializer removeAccessToken];
+}
+
 - (RACSignal *)login {
     return [self.client login];
 }
 
+- (RACSignal *)fetchTweetsFromTimeline {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+
+        [[self.client homeTimeline] subscribeNext:^(id responseObject) {
+            NSError *jsonError = nil;
+            NSArray *tweets = [MTLJSONAdapter modelsOfClass:[Tweet class] fromJSONArray:responseObject error:&jsonError];
+            
+            if (jsonError) {
+                [subscriber sendError:jsonError];
+            } else {
+                [subscriber sendNext:tweets];
+                [subscriber sendCompleted];
+            }
+            
+        } error:^(NSError *error) {
+            [subscriber sendError:error];
+        }];
+        
+        return [RACDisposable disposableWithBlock:^{
+            [self.client.operationQueue cancelAllOperations];
+        }];
+    }];
+}
+
+- (RACSignal *)sendTweet:(NSString *)tweetContent {
+    return [self.client sendTweet:tweetContent];
+}
+
 // XXX i think i like calling this "instance" more
-+ (TwitterManager *)sharedManager {
-    static TwitterManager *sharedManager = nil;
++ (TwitterManager *)instance {
+    static TwitterManager *instance = nil;
     static dispatch_once_t once;
     
     dispatch_once(&once, ^{
-        sharedManager = [[TwitterManager alloc] initWithConsumerKey:@"gb0RrlHtD5jyDcg29nPejByNy" consumerSecret:@"ThMqGTDTgzI59OrfqZaoChsesH8op5bQ9kLEeiGLXLMHyZFDTQ"];
+        instance = [[TwitterManager alloc] initWithConsumerKey:@"gb0RrlHtD5jyDcg29nPejByNy" consumerSecret:@"ThMqGTDTgzI59OrfqZaoChsesH8op5bQ9kLEeiGLXLMHyZFDTQ"];
     });
-    return sharedManager;
+    return instance;
 }
 
 

@@ -14,10 +14,17 @@
 @property (nonatomic) BOOL loggedIn;
 
 - (id)initWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret;
-- (BOOL)isLoggedIn;
-- (RACSignal *)login;
-- (void)authorizeClient:(NSURL *)url;
 
-+ (TwitterManager *)sharedManager;
+- (BOOL)isLoggedIn;
+
+- (void)authorizeClient:(NSURL *)url;
+- (void)signOut;
+
+- (RACSignal *)login;
+- (RACSignal *)fetchTweetsFromTimeline;
+- (RACSignal *)sendTweet:(NSString *)tweetContent;
+
+
++ (TwitterManager *)instance;
 
 @end

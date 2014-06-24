@@ -8,6 +8,7 @@
 #import <ReactiveCocoa.h>
 
 #import "LoginViewController.h"
+#import "TimelineTableViewController.h"
 #import "TwitterManager.h"
 
 @interface LoginViewController ()
@@ -32,11 +33,14 @@
     [super viewDidLoad];
     
     RACCommand *loginCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        return [[TwitterManager sharedManager] login];
+        return [[TwitterManager instance] login];
     }];
     [loginCommand.executionSignals subscribeNext:^(RACSignal *loginSignal) {
         [loginSignal subscribeCompleted:^{
-            NSLog(@"login successful!");
+            
+            NSArray *viewControllers = [NSArray arrayWithObject:[[TimelineTableViewController alloc] init]];
+            [self.navigationController setViewControllers:viewControllers animated:YES];
+
         }];
     }];
     self.loginButton.rac_command = loginCommand;

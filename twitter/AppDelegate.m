@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "TimelineTableViewController.h"
 #import "TwitterManager.h"
 
 @implementation AppDelegate
@@ -16,10 +17,16 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    // XXXX check if the user is logged in
-        // if not logged in, route to LoginViewController
-        // if logged in, route to TimelineViewController
-    self.window.rootViewController = [[LoginViewController alloc] init];
+    UIViewController *vc = nil;
+    if ([[TwitterManager instance] isLoggedIn]) {
+        vc = [[TimelineTableViewController alloc] init];
+    } else {
+        vc = [[LoginViewController alloc] init];
+    }
+    
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = nvc;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -54,7 +61,7 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     if ([url.scheme isEqualToString:@"cptwitter"]) {
-        [[TwitterManager sharedManager] authorizeClient:url];
+        [[TwitterManager instance] authorizeClient:url];
         return YES;
     }
     return NO;

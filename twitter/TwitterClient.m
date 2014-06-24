@@ -117,17 +117,37 @@
     }];
 }
 
+- (RACSignal *)homeTimeline {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [self GET:@"1.1/statuses/home_timeline.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [subscriber sendNext:responseObject];
+            [subscriber sendCompleted];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [subscriber sendError:error];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            [self.operationQueue cancelAllOperations];
+        }];
+    }];
+}
+
+- (RACSignal *)sendTweet:(NSString *)tweetContent {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [self POST:@"1.1/statuses/update.json" parameters:[NSDictionary dictionaryWithObject:tweetContent forKey:@"status"] constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [subscriber sendNext:nil];
+            [subscriber sendCompleted];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [subscriber sendError:error];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            [self.operationQueue cancelAllOperations];
+        }];
+    }];
+}
+
 - (void)authorizeClient:(NSURL *)url {
     self.authorizationURL = url;
     self.isAuthorized = YES;
-}
-
-- (AFHTTPRequestOperation *)homeTimeline {
-    return [self GET:@"1.1/statuses/home_timeline.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"response: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"error: %@", error);
-    }];
 }
 
 + (TwitterClient *)instance {

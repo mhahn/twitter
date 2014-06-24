@@ -16,7 +16,8 @@
 - (BOOL)isLoggedIn;
 - (void)authorizeClient:(NSURL *)url;
 - (RACSignal *)login;
-- (AFHTTPRequestOperation *)homeTimeline;
+- (RACSignal *)homeTimeline;
+- (RACSignal *)sendTweet:(NSString *)tweetContent;
 
 
 @end
