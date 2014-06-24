@@ -7,10 +7,15 @@
 //
 
 #import "TweetTableViewCell.h"
+#import "UIImageView+MHNetworking.h"
 
 @interface TweetTableViewCell()
 
 @property (weak, nonatomic) IBOutlet UILabel *tweetText;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePictureImage;
+@property (weak, nonatomic) IBOutlet UILabel *createdAtLabel;
 
 @end
 
@@ -29,6 +34,10 @@
 - (void)setTweet:(Tweet *)tweet {
     _tweet = tweet;
     _tweetText.text = tweet.text;
+    _userNameLabel.text = tweet.userName;
+    _screenNameLabel.text = tweet.screenName;
+    _createdAtLabel.text = tweet.createdAt;
+    [_profilePictureImage setImageWithURL:tweet.userProfilePicture withAnimationDuration:0.5];
 }
 
 @end

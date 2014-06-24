@@ -133,7 +133,8 @@
 
 - (RACSignal *)sendTweet:(NSString *)tweetContent {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        [self POST:@"1.1/statuses/update.json" parameters:[NSDictionary dictionaryWithObject:tweetContent forKey:@"status"] constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self POST:@"1.1/statuses/update.json" parameters:[NSDictionary dictionaryWithObject:tweetContent forKey:@"status"] success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [subscriber sendNext:nil];
             [subscriber sendCompleted];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -7,6 +7,7 @@ target "twitter" do
     pod 'ReactiveCocoa', '~> 2.3.1'
     pod 'TSMessages', '~> 0.9.9'
     pod 'Mantle', '~> 1.5'
+    pod 'MHPrettyDate', '~> 1.1.1'
 
 end
 

@@ -21,6 +21,7 @@
 
 @property (strong, nonatomic) UIBarButtonItem *signOutButton;
 @property (strong, nonatomic) UIBarButtonItem *composeButton;
+@property (nonatomic, strong) TweetTableViewCell *prototypeCell;
 
 - (void)signOut;
 - (void)composeTweet;
@@ -50,6 +51,7 @@
     [refreshControl addTarget:self action:@selector(fetchData:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refreshControl];
     
+    self.tableView.dataSource = self;
     // setup nibs
     UINib *tweetCellNib = [UINib nibWithNibName:@"TweetTableViewCell" bundle:nil];
     [self.tableView registerNib:tweetCellNib forCellReuseIdentifier:@"TweetCell"];
@@ -105,6 +107,26 @@
     if (sender) {
         [(UIRefreshControl *)sender endRefreshing];
     }
+}
+
+
+- (TweetTableViewCell *)prototypeCell {
+    if (!_prototypeCell) {
+        _prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    }
+    return _prototypeCell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.prototypeCell.tweet = tweets[indexPath.row];
+    [self.prototypeCell layoutIfNeeded];
+    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    NSLog(@"Height: %f", size.height);
+    return size.height + 1.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
 }
 
 /*

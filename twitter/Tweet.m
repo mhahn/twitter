@@ -6,12 +6,47 @@
 //  Copyright (c) 2014 Michael Hahn. All rights reserved.
 //
 
+#import "MHPrettyDate.h"
+
 #import "Tweet.h"
+
+
+@interface Tweet()
+
+@end
 
 @implementation Tweet
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return [NSDictionary dictionary];
+    return @{
+        @"createdAt": @"created_at",
+        @"tweetId": @"id_str",
+        @"userName": @"user.name",
+        @"screenName": @"user.screen_name",
+        @"userProfilePicture": @"user.profile_image_url",
+    };
+}
+
++ (NSDateFormatter *)dateFormatter {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    dateFormatter.dateFormat = @"EEE MMM d HH:mm:ss ZZZZ yyyy";
+    return dateFormatter;
+}
+
++ (NSValueTransformer *)createdAtJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+        NSDate *date = [[Tweet dateFormatter] dateFromString:str];
+        return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateShortRelativeTime];
+    } reverseBlock:^(NSDate *date) {
+        return [[Tweet dateFormatter] stringFromDate:date];
+    }];
+}
+
++ (NSValueTransformer *)userProfilePictureJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithBlock:^id(NSString *str) {
+        return [NSURL URLWithString:[str stringByReplacingOccurrencesOfString:@"normal" withString:@"bigger"]];
+    }];
 }
 
 @end
