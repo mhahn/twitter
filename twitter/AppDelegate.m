@@ -7,13 +7,19 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "TwitterManager.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+
+    // XXXX check if the user is logged in
+        // if not logged in, route to LoginViewController
+        // if logged in, route to TimelineViewController
+    self.window.rootViewController = [[LoginViewController alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -46,4 +52,11 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    if ([url.scheme isEqualToString:@"cptwitter"]) {
+        [[TwitterManager sharedManager] authorizeClient:url];
+        return YES;
+    }
+    return NO;
+}
 @end
