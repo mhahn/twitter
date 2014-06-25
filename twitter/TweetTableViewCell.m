@@ -36,7 +36,7 @@
     _tweetText.text = tweet.text;
     _userNameLabel.text = tweet.userName;
     _screenNameLabel.text = tweet.screenName;
-    _createdAtLabel.text = tweet.createdAt;
+    _createdAtLabel.text = tweet.prettyCreatedAt;
     [_profilePictureImage setImageWithURL:tweet.userProfilePicture withAnimationDuration:0.5];
 }
 

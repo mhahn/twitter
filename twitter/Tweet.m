@@ -19,11 +19,14 @@
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
+        @"prettyCreatedAt": @"created_at",
         @"createdAt": @"created_at",
         @"tweetId": @"id_str",
         @"userName": @"user.name",
         @"screenName": @"user.screen_name",
         @"userProfilePicture": @"user.profile_image_url",
+        @"retweetsCount": @"retweet_count",
+        @"favoritesCount": @"favorite_count",
     };
 }
 
@@ -41,6 +44,16 @@
 }
 
 + (NSValueTransformer *)createdAtJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+        NSDate *date = [[Tweet dateFormatter] dateFromString:str];
+        return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatWithTime];
+    } reverseBlock:^(NSDate *date) {
+        return [[Tweet dateFormatter] stringFromDate:date];
+    }];
+}
+
+
++ (NSValueTransformer *)prettyCreatedAtJSONTransformer {
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
         NSDate *date = [[Tweet dateFormatter] dateFromString:str];
         return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateShortRelativeTime];

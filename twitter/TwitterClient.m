@@ -114,6 +114,7 @@
 - (RACSignal *)homeTimeline {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [self GET:@"1.1/statuses/home_timeline.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response: %@", responseObject);
             [subscriber sendNext:responseObject];
             [subscriber sendCompleted];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
