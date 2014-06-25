@@ -44,9 +44,7 @@
 }
 
 + (NSValueTransformer *)userProfilePictureJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithBlock:^id(NSString *str) {
-        return [NSURL URLWithString:[str stringByReplacingOccurrencesOfString:@"normal" withString:@"bigger"]];
-    }];
+    return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
 }
 
 @end
