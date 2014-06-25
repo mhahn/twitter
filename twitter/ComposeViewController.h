@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Tweet.h"
+
 @interface ComposeViewController : UIViewController
+
+- (id)initWithTweet:(Tweet *)tweet;
 
 @end

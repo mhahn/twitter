@@ -83,8 +83,8 @@
     }];
 }
 
-- (RACSignal *)sendTweet:(NSString *)tweetContent {
-    return [self.client sendTweet:tweetContent];
+- (RACSignal *)sendTweet:(NSString *)tweetContent inReplyTo:(Tweet *)tweet {
+    return [self.client sendTweet:tweetContent inReplyTo:tweet.tweetId];
 }
 
 - (RACSignal *)retweet:(Tweet *)tweet {

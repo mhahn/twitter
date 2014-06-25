@@ -98,8 +98,7 @@
 }
 
 - (void)composeTweet {
-    NSArray *viewControllers = [NSArray arrayWithObject:[[ComposeViewController alloc] init]];
-    [self.navigationController setViewControllers:viewControllers animated:YES];
+    [self.navigationController pushViewController:[[ComposeViewController alloc] init] animated:YES];
 }
 
 - (void)fetchData:(id)sender {

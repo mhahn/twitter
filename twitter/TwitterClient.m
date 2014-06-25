@@ -124,10 +124,14 @@
     }];
 }
 
-- (RACSignal *)sendTweet:(NSString *)tweetContent {
+- (RACSignal *)sendTweet:(NSString *)tweetContent inReplyTo:(NSString *)tweetId {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:@{@"status": tweetContent}];
+        if (tweetId) {
+            [parameters setObject:tweetId forKey:@"in_reply_to_status_id"];
+        }
         
-        [self POST:@"1.1/statuses/update.json" parameters:[NSDictionary dictionaryWithObject:tweetContent forKey:@"status"] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self POST:@"1.1/statuses/update.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [subscriber sendNext:nil];
             [subscriber sendCompleted];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

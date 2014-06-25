@@ -27,7 +27,7 @@
 - (RACSignal *)login;
 - (RACSignal *)getCurrentUser;
 - (RACSignal *)fetchTweetsFromTimeline;
-- (RACSignal *)sendTweet:(NSString *)tweetContent;
+- (RACSignal *)sendTweet:(NSString *)tweetContent inReplyTo:(Tweet *)tweet;
 - (RACSignal *)retweet:(Tweet *)tweet;
 - (RACSignal *)favorite:(Tweet *)tweet;
 

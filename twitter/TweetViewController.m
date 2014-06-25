@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Michael Hahn. All rights reserved.
 //
 
+#import "ComposeViewController.h"
 #import "TwitterManager.h"
 #import "TweetViewController.h"
 #import "UIImageView+MHNetworking.h"
@@ -47,7 +48,7 @@
 }
 
 - (IBAction)replyButtonAction:(id)sender {
-    NSLog(@"replied");
+    [self.navigationController pushViewController:[[ComposeViewController alloc] initWithTweet:_tweet] animated:YES];
 }
 
 - (IBAction)retweetButtonAction:(id)sender {

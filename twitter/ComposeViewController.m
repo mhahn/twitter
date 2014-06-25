@@ -12,8 +12,11 @@
 #import "TimelineTableViewController.h"
 #import "TwitterManager.h"
 #import "User.h"
+#import "Tweet.h"
 
 @interface ComposeViewController ()
+
+@property (strong, nonatomic) Tweet *tweet;
 
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureImage;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
@@ -28,10 +31,10 @@
 
 @implementation ComposeViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)initWithTweet:(Tweet *)tweet {
+    self = [super init];
     if (self) {
-        // Custom initialization
+        _tweet = tweet;
     }
     return self;
 }
@@ -52,6 +55,10 @@
     _userNameLabel.text = user.userName;
     [_profilePictureImage setImageWithURL:user.userProfilePicture withAnimationDuration:0.5];
     
+    if (_tweet) {
+        self.tweetText.text = [NSString stringWithFormat:@"%@ ", _tweet.screenName];
+    }
+    
     // open the keyboard immediately
     [self.tweetText becomeFirstResponder];
     
@@ -62,8 +69,7 @@
 }
 
 - (void)sendTweet {
-    NSLog(@"Sending tweet: %@", self.tweetText.text);
-    [[[TwitterManager instance] sendTweet:self.tweetText.text] subscribeError:^(NSError *error) {
+    [[[TwitterManager instance] sendTweet:self.tweetText.text inReplyTo:_tweet] subscribeError:^(NSError *error) {
         // # XXX add error messaging
         NSLog(@"error sending tweet: %@", error);
     } completed:^{
@@ -72,8 +78,7 @@
 }
 
 - (void)popToTimeline {
-    NSArray *viewControllers = [NSArray arrayWithObject:[[TimelineTableViewController alloc] init]];
-    [self.navigationController setViewControllers:viewControllers animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
