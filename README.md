@@ -2,6 +2,8 @@
 
 An app to interact with twitter from your iphone
 
+Time Spent: 16 hours
+
 ## Required
 * [x] User can sign in using OAuth login flow
 * [x] User can view last 20 tweets from their home timeline
