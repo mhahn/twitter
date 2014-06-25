@@ -10,6 +10,8 @@
 #import <Foundation/Foundation.h>
 #import <ReactiveCocoa.h>
 
+#import "Tweet.h"
+
 @interface TwitterManager : NSObject
 
 @property (nonatomic) BOOL loggedIn;
@@ -26,6 +28,8 @@
 - (RACSignal *)getCurrentUser;
 - (RACSignal *)fetchTweetsFromTimeline;
 - (RACSignal *)sendTweet:(NSString *)tweetContent;
+- (RACSignal *)retweet:(Tweet *)tweet;
+- (RACSignal *)favorite:(Tweet *)tweet;
 
 
 + (TwitterManager *)instance;

@@ -87,6 +87,14 @@
     return [self.client sendTweet:tweetContent];
 }
 
+- (RACSignal *)retweet:(Tweet *)tweet {
+    return [self.client retweet:tweet.tweetId];
+}
+
+- (RACSignal *)favorite:(Tweet *)tweet {
+    return [self.client favorite:tweet.tweetId];
+}
+
 + (TwitterManager *)instance {
     static TwitterManager *instance = nil;
     static dispatch_once_t once;

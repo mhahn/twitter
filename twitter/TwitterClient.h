@@ -18,6 +18,8 @@
 - (RACSignal *)login;
 - (RACSignal *)homeTimeline;
 - (RACSignal *)sendTweet:(NSString *)tweetContent;
+- (RACSignal *)retweet:(NSString *)tweetId;
+- (RACSignal *)favorite:(NSString *)tweetId;
 - (RACSignal *)userInfo;
 
 

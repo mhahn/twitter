@@ -137,6 +137,31 @@
     }];
 }
 
+- (RACSignal *)retweet:(NSString *)tweetId {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        NSString *retweetURL = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", tweetId];
+        [self POST:retweetURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [subscriber sendNext:nil];
+            [subscriber sendCompleted];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [subscriber sendError:error];
+        }];
+        return [[RACDisposable alloc] init];
+    }];
+}
+
+- (RACSignal *)favorite:(NSString *)tweetId {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [self POST:@"1.1/favorites/create.json" parameters:[NSDictionary dictionaryWithObject:tweetId forKey:@"id"] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [subscriber sendNext:nil];
+            [subscriber sendCompleted];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [subscriber sendError:error];
+        }];
+        return [[RACDisposable alloc] init];
+    }];
+}
+
 - (RACSignal *)userInfo {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [self GET:@"1.1/account/verify_credentials.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
