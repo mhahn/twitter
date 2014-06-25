@@ -14,7 +14,7 @@ Time Spent: 16 hours
 * [x] User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
 
 ## Optional
-* [ ] Optional: When composing, you should have a countdown in the upper right for the tweet limit.
+* [x] Optional: When composing, you should have a countdown in the upper right for the tweet limit.
 * [ ] Optional: After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 * [ ] Optional: Retweeting and favoriting should increment the retweet and favorite count.
 * [ ] Optional: User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
