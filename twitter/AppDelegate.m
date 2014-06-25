@@ -16,7 +16,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
+    
+    // setup views
     UIViewController *vc = nil;
     if ([[TwitterManager instance] isLoggedIn]) {
         vc = [[TimelineTableViewController alloc] init];

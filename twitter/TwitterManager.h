@@ -6,12 +6,14 @@
 //  Copyright (c) 2014 Michael Hahn. All rights reserved.
 //
 
+#import "User.h"
 #import <Foundation/Foundation.h>
 #import <ReactiveCocoa.h>
 
 @interface TwitterManager : NSObject
 
 @property (nonatomic) BOOL loggedIn;
+@property (nonatomic, strong) User *currentUser;
 
 - (id)initWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret;
 
@@ -21,6 +23,7 @@
 - (void)signOut;
 
 - (RACSignal *)login;
+- (RACSignal *)getCurrentUser;
 - (RACSignal *)fetchTweetsFromTimeline;
 - (RACSignal *)sendTweet:(NSString *)tweetContent;
 

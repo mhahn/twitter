@@ -18,6 +18,7 @@
 - (RACSignal *)login;
 - (RACSignal *)homeTimeline;
 - (RACSignal *)sendTweet:(NSString *)tweetContent;
+- (RACSignal *)userInfo;
 
 
 @end

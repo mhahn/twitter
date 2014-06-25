@@ -21,6 +21,7 @@
 		BFBB5199195A101300A625CE /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB5197195A101300A625CE /* ComposeViewController.m */; };
 		BFBB519A195A101300A625CE /* ComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBB5198195A101300A625CE /* ComposeViewController.xib */; };
 		BFBB519E195A344800A625CE /* UIImageView+MHNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB519D195A344800A625CE /* UIImageView+MHNetworking.m */; };
+		BFBB51A1195A428B00A625CE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB51A0195A428B00A625CE /* User.m */; };
 		BFC8A6601952A62100E9EC1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC8A65F1952A62100E9EC1F /* Foundation.framework */; };
 		BFC8A6621952A62100E9EC1F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC8A6611952A62100E9EC1F /* CoreGraphics.framework */; };
 		BFC8A6641952A62100E9EC1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC8A6631952A62100E9EC1F /* UIKit.framework */; };
@@ -69,6 +70,8 @@
 		BFBB5198195A101300A625CE /* ComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeViewController.xib; sourceTree = "<group>"; };
 		BFBB519C195A344700A625CE /* UIImageView+MHNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MHNetworking.h"; sourceTree = "<group>"; };
 		BFBB519D195A344800A625CE /* UIImageView+MHNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MHNetworking.m"; sourceTree = "<group>"; };
+		BFBB519F195A428B00A625CE /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		BFBB51A0195A428B00A625CE /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		BFC8A65C1952A62100E9EC1F /* twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC8A65F1952A62100E9EC1F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BFC8A6611952A62100E9EC1F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -144,6 +147,8 @@
 			children = (
 				BFBB51931959FD0E00A625CE /* Tweet.h */,
 				BFBB51941959FD0E00A625CE /* Tweet.m */,
+				BFBB519F195A428B00A625CE /* User.h */,
+				BFBB51A0195A428B00A625CE /* User.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -381,6 +386,7 @@
 				BFBB51901959FC9B00A625CE /* TweetTableViewCell.m in Sources */,
 				BFBB5183195910CF00A625CE /* NSURL+dictionaryFromQueryString.m in Sources */,
 				BFBB518619594F4D00A625CE /* TwitterManager.m in Sources */,
+				BFBB51A1195A428B00A625CE /* User.m in Sources */,
 				BFBB519E195A344800A625CE /* UIImageView+MHNetworking.m in Sources */,
 				BFBB517A1958DE2700A625CE /* TwitterClient.m in Sources */,
 				BFC8A66C1952A62100E9EC1F /* main.m in Sources */,

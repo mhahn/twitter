@@ -146,6 +146,20 @@
     }];
 }
 
+- (RACSignal *)userInfo {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [self GET:@"1.1/account/verify_credentials.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [subscriber sendNext:responseObject];
+            [subscriber sendCompleted];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [subscriber sendError:error];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            [self.operationQueue cancelAllOperations];
+        }];
+    }];
+}
+
 - (void)authorizeClient:(NSURL *)url {
     self.authorizationURL = url;
     self.isAuthorized = YES;

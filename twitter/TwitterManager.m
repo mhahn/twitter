@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Michael Hahn. All rights reserved.
 //
 
+#import "User.h"
 #import "Tweet.h"
 #import "TwitterClient.h"
 #import "TwitterManager.h"
@@ -43,6 +44,25 @@
     return [self.client login];
 }
 
+- (RACSignal *)getCurrentUser {
+    
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [[self.client userInfo] subscribeNext:^(NSDictionary *responseObject) {
+            NSError *jsonError = nil;
+            User *user = [MTLJSONAdapter modelOfClass:[User class] fromJSONDictionary:responseObject error:&jsonError];
+            self.currentUser = user;
+            [subscriber sendNext:user];
+            [subscriber sendCompleted];
+        } error:^(NSError *error) {
+            [subscriber sendError:error];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            [self.client.operationQueue cancelAllOperations];
+        }];
+    }];
+    
+}
+
 - (RACSignal *)fetchTweetsFromTimeline {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
 
@@ -71,7 +91,6 @@
     return [self.client sendTweet:tweetContent];
 }
 
-// XXX i think i like calling this "instance" more
 + (TwitterManager *)instance {
     static TwitterManager *instance = nil;
     static dispatch_once_t once;
