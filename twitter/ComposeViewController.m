@@ -7,6 +7,7 @@
 //
 
 #import "UIImageView+MHNetworking.h"
+#import "TSMessage.h"
 
 #import "ComposeViewController.h"
 #import "TimelineTableViewController.h"
@@ -29,6 +30,7 @@
 - (void)cancel;
 - (void)sendTweet;
 - (void)popToTimeline;
+- (BOOL)isTweetValid;
 
 @end
 
@@ -92,16 +94,28 @@
 }
 
 - (void)sendTweet {
-    [[[TwitterManager instance] sendTweet:self.tweetText.text inReplyTo:_tweet] subscribeError:^(NSError *error) {
-        // # XXX add error messaging
-        NSLog(@"error sending tweet: %@", error);
-    } completed:^{
-        [self popToTimeline];
-    }];
+    if ([self isTweetValid]) {
+        [[[TwitterManager instance] sendTweet:self.tweetText.text inReplyTo:_tweet] subscribeError:^(NSError *error) {
+            // # XXX add error messaging
+            NSLog(@"error sending tweet: %@", error);
+        } completed:^{
+            [self popToTimeline];
+        }];
+    } else {
+        [TSMessage showNotificationInViewController:self title:@"Tweets must be less than 140 characters" subtitle:nil type:TSMessageNotificationTypeError duration:2 canBeDismissedByUser:YES];
+    }
 }
 
 - (void)popToTimeline {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL)isTweetValid {
+    if ([self.tweetText.text length] > 140) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 @end
