@@ -13,9 +13,16 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    UIColor *twitterBlue = [UIColor colorWithRed:0.333 green:0.675 blue:0.933 alpha:1]; /*#55acee*/
+    UIColor *twitterWhite = [UIColor colorWithRed:0.961 green:0.973 blue:0.98 alpha:1]; /*#f5f8fa*/
+    [[UINavigationBar appearance] setBarTintColor:twitterBlue];
+    [[UINavigationBar appearance] setTintColor:twitterWhite];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:twitterWhite, NSForegroundColorAttributeName, twitterWhite, NSBackgroundColorAttributeName, nil]];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     // setup views
     UIViewController *vc = nil;
@@ -26,6 +33,7 @@
     }
     
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    
     self.window.rootViewController = nvc;
     
     self.window.backgroundColor = [UIColor whiteColor];

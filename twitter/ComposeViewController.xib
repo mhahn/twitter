@@ -6,7 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeViewController">
             <connections>
+                <outlet property="profilePictureImage" destination="Fie-0U-vPa" id="Owa-y9-0Um"/>
+                <outlet property="screenNameLabel" destination="3zQ-xe-9Ly" id="NJ2-6V-vrM"/>
                 <outlet property="tweetText" destination="Pf4-wz-RuD" id="gVH-oZ-ANb"/>
+                <outlet property="userNameLabel" destination="5SC-lb-CPi" id="bLi-JA-3Rn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,14 +18,50 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Tweet Text" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pf4-wz-RuD">
-                    <rect key="frame" x="20" y="167" width="280" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Pf4-wz-RuD">
+                    <rect key="frame" x="20" y="167" width="280" height="224"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="twitter"/>
                 </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fie-0U-vPa">
+                    <rect key="frame" x="20" y="91" width="48" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="Cim-Eu-9LD"/>
+                        <constraint firstAttribute="height" constant="48" id="dg6-cF-QAx"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="User Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SC-lb-CPi">
+                    <rect key="frame" x="76" y="91" width="224" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="screenname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3zQ-xe-9Ly">
+                    <rect key="frame" x="76" y="114" width="224" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="3zQ-xe-9Ly" firstAttribute="top" secondItem="5SC-lb-CPi" secondAttribute="bottom" constant="5" id="5kY-3c-qMn"/>
+                <constraint firstItem="Fie-0U-vPa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="94N-6Z-HJg"/>
+                <constraint firstItem="5SC-lb-CPi" firstAttribute="leading" secondItem="Fie-0U-vPa" secondAttribute="trailing" constant="8" id="Fz5-Ab-0gX"/>
+                <constraint firstItem="Fie-0U-vPa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="91" id="KYe-Zo-Oug"/>
+                <constraint firstItem="Pf4-wz-RuD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="KgX-Q2-gpN"/>
+                <constraint firstItem="Pf4-wz-RuD" firstAttribute="top" secondItem="Fie-0U-vPa" secondAttribute="bottom" constant="28" id="LA6-SP-lCB"/>
+                <constraint firstAttribute="bottom" secondItem="Pf4-wz-RuD" secondAttribute="bottom" constant="177" id="LAs-UA-089"/>
+                <constraint firstAttribute="trailing" secondItem="5SC-lb-CPi" secondAttribute="trailing" constant="20" id="RSV-Og-VUa"/>
+                <constraint firstItem="3zQ-xe-9Ly" firstAttribute="leading" secondItem="Fie-0U-vPa" secondAttribute="trailing" constant="8" id="mtE-18-ikz"/>
+                <constraint firstAttribute="trailing" secondItem="3zQ-xe-9Ly" secondAttribute="trailing" constant="20" id="o0u-Zu-Ekh"/>
+                <constraint firstItem="3zQ-xe-9Ly" firstAttribute="leading" secondItem="Fie-0U-vPa" secondAttribute="trailing" constant="8" id="rr3-Cy-wse"/>
+                <constraint firstAttribute="trailing" secondItem="Pf4-wz-RuD" secondAttribute="trailing" constant="20" id="s3U-Rj-gAG"/>
+                <constraint firstItem="5SC-lb-CPi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="91" id="u5f-7r-RHU"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
