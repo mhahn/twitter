@@ -60,9 +60,7 @@
             }
         }];
         
-        return [RACDisposable disposableWithBlock:^{
-            [self.operationQueue cancelAllOperations];
-        }];
+        return [[RACDisposable alloc] init];
         
     }] doError:^(NSError *error) {
         NSLog(@"Error client login: %@", error);
@@ -87,9 +85,7 @@
 
                                 }
          ];
-        return [RACDisposable disposableWithBlock:^{
-            [self.operationQueue cancelAllOperations];
-        }];
+        return [[RACDisposable alloc] init];
     }] doError:^(NSError *error) {
         NSLog(@"Error fetchRequestToken signal: %@", error);
     }];
@@ -110,9 +106,7 @@
                 }];
             }
         }
-        return [RACDisposable disposableWithBlock:^{
-            [self.operationQueue cancelAllOperations];
-        }];
+        return [[RACDisposable alloc] init];
         
     }];
 }
@@ -125,9 +119,7 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [subscriber sendError:error];
         }];
-        return [RACDisposable disposableWithBlock:^{
-            [self.operationQueue cancelAllOperations];
-        }];
+        return [[RACDisposable alloc] init];
     }];
 }
 
@@ -140,9 +132,7 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [subscriber sendError:error];
         }];
-        return [RACDisposable disposableWithBlock:^{
-            [self.operationQueue cancelAllOperations];
-        }];
+        return [[RACDisposable alloc] init];;
     }];
 }
 
@@ -154,9 +144,7 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [subscriber sendError:error];
         }];
-        return [RACDisposable disposableWithBlock:^{
-            [self.operationQueue cancelAllOperations];
-        }];
+        return [[RACDisposable alloc] init];
     }];
 }
 

@@ -56,9 +56,7 @@
         } error:^(NSError *error) {
             [subscriber sendError:error];
         }];
-        return [RACDisposable disposableWithBlock:^{
-            [self.client.operationQueue cancelAllOperations];
-        }];
+        return [[RACDisposable alloc] init];
     }];
     
 }
@@ -81,9 +79,7 @@
             [subscriber sendError:error];
         }];
         
-        return [RACDisposable disposableWithBlock:^{
-            [self.client.operationQueue cancelAllOperations];
-        }];
+        return [[RACDisposable alloc] init];
     }];
 }
 
