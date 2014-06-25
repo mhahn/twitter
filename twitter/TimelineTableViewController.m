@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Michael Hahn. All rights reserved.
 //
 
+#import "MBProgressHud.h"
 #import <ReactiveCocoa.h>
 
 #import "ComposeViewController.h"
@@ -18,6 +19,7 @@
 
 @interface TimelineTableViewController () {
     NSArray *tweets;
+    NSInteger sections;
 }
 
 @property (strong, nonatomic) UIBarButtonItem *signOutButton;
@@ -45,8 +47,12 @@
         NSLog(@"Current user: %@", [[[TwitterManager instance] currentUser] screenName]);
     }];
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     // fetch the initial ddata
     [self fetchData:nil];
+    // set sections to 0 while loading
+    sections = 0;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // setup the navigation bar
     self.navigationItem.title = @"Home";
@@ -76,7 +82,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return sections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -104,15 +110,21 @@
 - (void)fetchData:(id)sender {
     [[[TwitterManager instance] fetchTweetsFromTimeline] subscribeNext:^(NSArray *timelineTweets) {
         tweets = timelineTweets;
-        [self.tableView reloadData];
         [self finishFetching:sender];
+        [self.tableView reloadData];
     } error:^(NSError *error) {
         NSLog(@"Error fetching tweets: %@", error);
     }];
 }
 
 - (void)finishFetching:(id)sender {
-    // XXX dismiss loader
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    
+    if (!sections) {
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        sections = 1;
+    }
+    
     if (sender) {
         [(UIRefreshControl *)sender endRefreshing];
     }

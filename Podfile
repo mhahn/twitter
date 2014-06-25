@@ -8,6 +8,7 @@ target "twitter" do
     pod 'TSMessages', '~> 0.9.9'
     pod 'Mantle', '~> 1.5'
     pod 'MHPrettyDate', '~> 1.1.1'
+    pod 'MBProgressHUD', '~> 0.8'
 
 end
 
