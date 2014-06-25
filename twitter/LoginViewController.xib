@@ -15,8 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J8j-qa-CRk">
-                    <rect key="frame" x="137" y="269" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J8j-qa-CRk">
+                    <rect key="frame" x="137" y="176" width="46" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Login">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -24,6 +24,11 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="J8j-qa-CRk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="176" id="Eka-DH-KI7"/>
+                <constraint firstAttribute="trailing" secondItem="J8j-qa-CRk" secondAttribute="trailing" constant="137" id="K52-9r-73R"/>
+                <constraint firstItem="J8j-qa-CRk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="137" id="vBR-tE-H6v"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

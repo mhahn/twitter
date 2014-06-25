@@ -54,7 +54,7 @@
     [[[TwitterManager instance] retweet:_tweet] subscribeError:^(NSError *error) {
         NSLog(@"error retweeting: %@", error);
     } completed:^{
-        NSLog(@"retweeted!");
+        [self.retweetButton setImage:[UIImage imageNamed:@"retweet_on"] forState:UIControlStateNormal];
     }];
 }
 
@@ -62,7 +62,7 @@
     [[[TwitterManager instance] favorite:_tweet] subscribeError:^(NSError *error) {
         NSLog(@"error favoriting: %@", error);
     } completed:^{
-        NSLog(@"favorited!");
+        [self.favoriteButton setImage:[UIImage imageNamed:@"favorite_on"] forState:UIControlStateNormal];
     }];
 }
 @end
