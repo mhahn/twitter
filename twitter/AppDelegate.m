@@ -22,7 +22,7 @@
     [[UINavigationBar appearance] setTintColor:twitterWhite];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:twitterWhite, NSForegroundColorAttributeName, twitterWhite, NSBackgroundColorAttributeName, nil]];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     // setup views
     UIViewController *vc = nil;
