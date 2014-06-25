@@ -129,7 +129,6 @@
     self.prototypeCell.tweet = tweets[indexPath.row];
     [self.prototypeCell layoutIfNeeded];
     CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    NSLog(@"Height: %f", size.height);
     return size.height + 1.0f;
 }
 

@@ -22,6 +22,8 @@
 		BFBB519A195A101300A625CE /* ComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBB5198195A101300A625CE /* ComposeViewController.xib */; };
 		BFBB519E195A344800A625CE /* UIImageView+MHNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB519D195A344800A625CE /* UIImageView+MHNetworking.m */; };
 		BFBB51A1195A428B00A625CE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB51A0195A428B00A625CE /* User.m */; };
+		BFBB51A5195A5C8500A625CE /* TweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB51A3195A5C8500A625CE /* TweetViewController.m */; };
+		BFBB51A6195A5C8500A625CE /* TweetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBB51A4195A5C8500A625CE /* TweetViewController.xib */; };
 		BFC8A6601952A62100E9EC1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC8A65F1952A62100E9EC1F /* Foundation.framework */; };
 		BFC8A6621952A62100E9EC1F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC8A6611952A62100E9EC1F /* CoreGraphics.framework */; };
 		BFC8A6641952A62100E9EC1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC8A6631952A62100E9EC1F /* UIKit.framework */; };
@@ -72,6 +74,9 @@
 		BFBB519D195A344800A625CE /* UIImageView+MHNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MHNetworking.m"; sourceTree = "<group>"; };
 		BFBB519F195A428B00A625CE /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		BFBB51A0195A428B00A625CE /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		BFBB51A2195A5C8500A625CE /* TweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetViewController.h; sourceTree = "<group>"; };
+		BFBB51A3195A5C8500A625CE /* TweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetViewController.m; sourceTree = "<group>"; };
+		BFBB51A4195A5C8500A625CE /* TweetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetViewController.xib; sourceTree = "<group>"; };
 		BFC8A65C1952A62100E9EC1F /* twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC8A65F1952A62100E9EC1F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BFC8A6611952A62100E9EC1F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -128,6 +133,9 @@
 				BFBB5196195A101300A625CE /* ComposeViewController.h */,
 				BFBB5197195A101300A625CE /* ComposeViewController.m */,
 				BFBB5198195A101300A625CE /* ComposeViewController.xib */,
+				BFBB51A2195A5C8500A625CE /* TweetViewController.h */,
+				BFBB51A3195A5C8500A625CE /* TweetViewController.m */,
+				BFBB51A4195A5C8500A625CE /* TweetViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -322,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFBB51911959FC9B00A625CE /* TweetTableViewCell.xib in Resources */,
+				BFBB51A6195A5C8500A625CE /* TweetViewController.xib in Resources */,
 				BFBB519A195A101300A625CE /* ComposeViewController.xib in Resources */,
 				BFC8A66A1952A62100E9EC1F /* InfoPlist.strings in Resources */,
 				BFC8A6721952A62100E9EC1F /* Images.xcassets in Resources */,
@@ -378,6 +387,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFBB51A5195A5C8500A625CE /* TweetViewController.m in Sources */,
 				BFBB51951959FD0E00A625CE /* Tweet.m in Sources */,
 				BFBB517F1958E09800A625CE /* LoginViewController.m in Sources */,
 				BFBB518A1959F7C000A625CE /* TimelineTableViewController.m in Sources */,

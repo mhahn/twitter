@@ -27,6 +27,12 @@
     };
 }
 
++ (NSValueTransformer *)screenNameJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithBlock:^NSString *(NSString *str) {
+        return [NSString stringWithFormat:@"@%@", str];
+    }];
+}
+
 + (NSDateFormatter *)dateFormatter {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
