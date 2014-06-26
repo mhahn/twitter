@@ -24,6 +24,9 @@
 - (void)authorizeClient:(NSURL *)url;
 - (void)signOut;
 
+- (Tweet *)getTweetAtIndex:(NSUInteger)index;
+- (NSArray *)getCurrentTweets;
+
 - (RACSignal *)login;
 - (RACSignal *)getCurrentUser;
 - (RACSignal *)fetchTweetsFromTimeline;

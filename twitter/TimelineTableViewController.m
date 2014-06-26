@@ -18,7 +18,6 @@
 #import "TweetViewController.h"
 
 @interface TimelineTableViewController () {
-    NSArray *tweets;
     NSInteger sections;
 }
 
@@ -73,10 +72,8 @@
     [self.tableView registerNib:tweetCellNib forCellReuseIdentifier:@"TweetCell"];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -86,14 +83,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [tweets count];
+    return [[[TwitterManager instance] getCurrentTweets] count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
-    cell.tweet = tweets[indexPath.row];
+    cell.tweet = [[TwitterManager instance] getTweetAtIndex:indexPath.row];
     return cell;
 }
 
@@ -108,12 +105,11 @@
 }
 
 - (void)fetchData:(id)sender {
-    [[[TwitterManager instance] fetchTweetsFromTimeline] subscribeNext:^(NSArray *timelineTweets) {
-        tweets = timelineTweets;
+    [[[TwitterManager instance] fetchTweetsFromTimeline] subscribeError:^(NSError *error) {
+        NSLog(@"Error fetching tweets: %@", error);
+    } completed:^{
         [self finishFetching:sender];
         [self.tableView reloadData];
-    } error:^(NSError *error) {
-        NSLog(@"Error fetching tweets: %@", error);
     }];
 }
 
@@ -139,7 +135,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.prototypeCell.tweet = tweets[indexPath.row];
+    self.prototypeCell.tweet = [[TwitterManager instance] getTweetAtIndex:indexPath.row];
     [self.prototypeCell layoutIfNeeded];
     CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     return size.height + 1.0f;
@@ -156,7 +152,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TweetViewController *tweetViewController = [[TweetViewController alloc] initWithNibName:@"TweetViewController" bundle:nil];
-    tweetViewController.tweet = tweets[indexPath.row];
+    tweetViewController.tweet = [[TwitterManager instance] getTweetAtIndex:indexPath.row];
     [self.navigationController pushViewController:tweetViewController animated:YES];
     
 }

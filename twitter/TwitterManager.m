@@ -10,10 +10,12 @@
 #import "Tweet.h"
 #import "TwitterClient.h"
 #import "TwitterManager.h"
+#import "TweetSet.h"
 
 @interface TwitterManager()
 
 @property (strong, nonatomic) TwitterClient *client;
+@property (strong, nonatomic) TweetSet *tweetSet;
 
 @end
 
@@ -23,6 +25,7 @@
     self = [super init];
     if (self) {
         _client = [[TwitterClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.twitter.com/"] consumerKey:consumerKey consumerSecret:consumerSecret];
+        _tweetSet = [[TweetSet alloc] init];
     }
     return self;
 }
@@ -38,6 +41,14 @@
 - (void)signOut {
     // ideally this would return a signal too, but not sure what to do about RACDisposable with no cancel operation
     [self.client.requestSerializer removeAccessToken];
+}
+
+- (Tweet *)getTweetAtIndex:(NSUInteger)index {
+    return [self.tweetSet getTweetAtIndex:index];
+}
+
+- (NSArray *)getCurrentTweets {
+    return [self.tweetSet getTweets];
 }
 
 - (RACSignal *)login {
@@ -71,7 +82,8 @@
             if (jsonError) {
                 [subscriber sendError:jsonError];
             } else {
-                [subscriber sendNext:tweets];
+                [self.tweetSet addTweetsToSet:tweets];
+                [subscriber sendNext:nil];
                 [subscriber sendCompleted];
             }
             
@@ -84,7 +96,23 @@
 }
 
 - (RACSignal *)sendTweet:(NSString *)tweetContent inReplyTo:(Tweet *)tweet {
-    return [self.client sendTweet:tweetContent inReplyTo:tweet.tweetId];
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [[self.client sendTweet:tweetContent inReplyTo:tweet.tweetId] subscribeNext:^(NSDictionary *responseObject) {
+            NSError *jsonError = nil;
+            Tweet *tweet = [MTLJSONAdapter modelOfClass:[Tweet class] fromJSONDictionary:responseObject error:&jsonError];
+            if (jsonError) {
+                [subscriber sendError:jsonError];
+            } else {
+                // add the new tweet to the tweet set
+                [[[TwitterManager instance] tweetSet] prependTweetToSet:tweet];
+                [subscriber sendNext:tweet];
+                [subscriber sendCompleted];
+            }
+        } error:^(NSError *error) {
+            [subscriber sendError:error];
+        }];
+        return [[RACDisposable alloc] init];
+    }];
 }
 
 - (RACSignal *)retweet:(Tweet *)tweet {

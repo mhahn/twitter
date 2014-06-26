@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D0C4CA48784457A93761A1D /* libPods-twitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4001D984E24E1FA9A5E423 /* libPods-twitter.a */; };
+		BFB71018195BB24B006B23FC /* TweetSet.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB71017195BB24B006B23FC /* TweetSet.m */; };
 		BFBB517A1958DE2700A625CE /* TwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB51791958DE2700A625CE /* TwitterClient.m */; };
 		BFBB517F1958E09800A625CE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB517D1958E09800A625CE /* LoginViewController.m */; };
 		BFBB51801958E09800A625CE /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBB517E1958E09800A625CE /* LoginViewController.xib */; };
@@ -50,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		8C4001D984E24E1FA9A5E423 /* libPods-twitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-twitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFB71016195BB24B006B23FC /* TweetSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetSet.h; sourceTree = "<group>"; };
+		BFB71017195BB24B006B23FC /* TweetSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetSet.m; sourceTree = "<group>"; };
 		BFBB51781958DE2700A625CE /* TwitterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterClient.h; sourceTree = "<group>"; };
 		BFBB51791958DE2700A625CE /* TwitterClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterClient.m; sourceTree = "<group>"; };
 		BFBB517C1958E09800A625CE /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 				BFBB51791958DE2700A625CE /* TwitterClient.m */,
 				BFBB518419594F4D00A625CE /* TwitterManager.h */,
 				BFBB518519594F4D00A625CE /* TwitterManager.m */,
+				BFB71016195BB24B006B23FC /* TweetSet.h */,
+				BFB71017195BB24B006B23FC /* TweetSet.m */,
 			);
 			path = twitter;
 			sourceTree = "<group>";
@@ -395,6 +400,7 @@
 				BFC8A6701952A62100E9EC1F /* AppDelegate.m in Sources */,
 				BFBB51901959FC9B00A625CE /* TweetTableViewCell.m in Sources */,
 				BFBB5183195910CF00A625CE /* NSURL+dictionaryFromQueryString.m in Sources */,
+				BFB71018195BB24B006B23FC /* TweetSet.m in Sources */,
 				BFBB518619594F4D00A625CE /* TwitterManager.m in Sources */,
 				BFBB51A1195A428B00A625CE /* User.m in Sources */,
 				BFBB519E195A344800A625CE /* UIImageView+MHNetworking.m in Sources */,
