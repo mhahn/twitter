@@ -57,7 +57,7 @@
     self.navigationItem.rightBarButtonItems = @[tweetButton, wordCount];
     
     // load the user info
-    User *user = [[TwitterManager instance] currentUser];
+    User *user = [[TwitterManager instance] getCurrentUser];
     _screenNameLabel.text = user.screenName;
     _userNameLabel.text = user.userName;
     [_profilePictureImage setImageWithURL:user.userProfilePicture withAnimationDuration:0.5];

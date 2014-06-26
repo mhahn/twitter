@@ -38,14 +38,6 @@
 {
     [super viewDidLoad];
     
-    
-    // fetch the current user
-    [[[TwitterManager instance] getCurrentUser] subscribeError:^(NSError *error) {
-        NSLog(@"Failed fetching user: %@", error);
-    } completed:^{
-        NSLog(@"Current user: %@", [[[TwitterManager instance] currentUser] screenName]);
-    }];
-    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     // fetch the initial ddata
     [self fetchData:nil];

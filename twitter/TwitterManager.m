@@ -14,8 +14,11 @@
 
 @interface TwitterManager()
 
+@property (nonatomic, strong) User *user;
 @property (strong, nonatomic) TwitterClient *client;
 @property (strong, nonatomic) TweetSet *tweetSet;
+
+- (RACSignal *)fetchCurrentUser;
 
 @end
 
@@ -52,16 +55,28 @@
 }
 
 - (RACSignal *)login {
-    return [self.client login];
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [[self.client login] subscribeError:^(NSError *error) {
+            [subscriber sendError:error];
+        } completed:^{
+            [[self fetchCurrentUser] subscribeError:^(NSError *error) {
+                [subscriber sendError:error];
+            } completed:^{
+                [subscriber sendNext:nil];
+                [subscriber sendCompleted];
+            }];
+        }];
+        return [[RACDisposable alloc] init];
+    }];
 }
 
-- (RACSignal *)getCurrentUser {
+- (RACSignal *)fetchCurrentUser {
     
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [[self.client userInfo] subscribeNext:^(NSDictionary *responseObject) {
             NSError *jsonError = nil;
             User *user = [MTLJSONAdapter modelOfClass:[User class] fromJSONDictionary:responseObject error:&jsonError];
-            self.currentUser = user;
+            self.user = user;
             [subscriber sendNext:user];
             [subscriber sendCompleted];
         } error:^(NSError *error) {
@@ -133,5 +148,18 @@
     return instance;
 }
 
+- (void)setUser:(User *)user {
+    _user = user;
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:user];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"currentUser"];
+}
+
+- (User *)getCurrentUser {
+    if (!_user) {
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentUser"];
+        _user = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return _user;
+}
 
 @end

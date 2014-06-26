@@ -44,9 +44,6 @@
 
 - (RACSignal *)login {
     return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        // XXX remove once we're proplery tracking login state
-        [self.requestSerializer removeAccessToken];
-        
         [[self fetchRequestToken] subscribeNext:^(NSString *authURL) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:authURL]];
         }];
@@ -55,6 +52,7 @@
             if (_isAuthorized) {
                 [[self fetchAccessToken] subscribeCompleted:^{
                     _isLoggedIn = YES;
+                    [subscriber sendNext:nil];
                     [subscriber sendCompleted];
                 }];
             }

@@ -15,7 +15,6 @@
 @interface TwitterManager : NSObject
 
 @property (nonatomic) BOOL loggedIn;
-@property (nonatomic, strong) User *currentUser;
 
 - (id)initWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret;
 
@@ -24,11 +23,11 @@
 - (void)authorizeClient:(NSURL *)url;
 - (void)signOut;
 
+- (User *)getCurrentUser;
 - (Tweet *)getTweetAtIndex:(NSUInteger)index;
 - (NSArray *)getCurrentTweets;
 
 - (RACSignal *)login;
-- (RACSignal *)getCurrentUser;
 - (RACSignal *)fetchTweetsFromTimeline;
 - (RACSignal *)sendTweet:(NSString *)tweetContent inReplyTo:(Tweet *)tweet;
 - (RACSignal *)retweet:(Tweet *)tweet;
