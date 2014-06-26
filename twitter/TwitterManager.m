@@ -44,6 +44,7 @@
 - (void)signOut {
     // ideally this would return a signal too, but not sure what to do about RACDisposable with no cancel operation
     [self.client.requestSerializer removeAccessToken];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentUser"];
 }
 
 - (Tweet *)getTweetAtIndex:(NSUInteger)index {

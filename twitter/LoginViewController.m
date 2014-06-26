@@ -32,6 +32,10 @@
 {
     [super viewDidLoad];
     
+    UIColor *twitterBlue = [UIColor colorWithRed:0.333 green:0.675 blue:0.933 alpha:1]; /*#55acee*/
+    self.view.backgroundColor = twitterBlue;
+    [self.navigationController setNavigationBarHidden:YES];
+    
     RACCommand *loginCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         return [[TwitterManager instance] login];
     }];
@@ -39,7 +43,8 @@
         [loginSignal subscribeCompleted:^{
             
             NSArray *viewControllers = [NSArray arrayWithObject:[[TimelineTableViewController alloc] init]];
-            [self.navigationController setViewControllers:viewControllers animated:YES];
+            [self.navigationController setNavigationBarHidden:NO];
+            [self.navigationController setViewControllers:viewControllers animated:NO];
 
         }];
     }];

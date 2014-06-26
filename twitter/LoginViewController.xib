@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
-                <outlet property="loginButton" destination="J8j-qa-CRk" id="bF1-Gg-cge"/>
+                <outlet property="loginButton" destination="qGV-yv-5C0" id="14R-Ka-WJ0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,22 +15,29 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J8j-qa-CRk">
-                    <rect key="frame" x="137" y="176" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGV-yv-5C0">
+                    <rect key="frame" x="136" y="185" width="48" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Login">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="0b1-us-aqS"/>
+                        <constraint firstAttribute="height" constant="48" id="NWJ-0L-4e0"/>
+                    </constraints>
+                    <state key="normal" image="twitter-48">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="J8j-qa-CRk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="176" id="Eka-DH-KI7"/>
-                <constraint firstAttribute="trailing" secondItem="J8j-qa-CRk" secondAttribute="trailing" constant="137" id="K52-9r-73R"/>
-                <constraint firstItem="J8j-qa-CRk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="137" id="vBR-tE-H6v"/>
+                <constraint firstAttribute="trailing" secondItem="qGV-yv-5C0" secondAttribute="trailing" constant="136" id="RlN-QJ-9Nm"/>
+                <constraint firstItem="qGV-yv-5C0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="185" id="cse-Uq-8zV"/>
+                <constraint firstItem="qGV-yv-5C0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="136" id="sni-zU-6bg"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="twitter-48" width="48" height="48"/>
+    </resources>
 </document>
