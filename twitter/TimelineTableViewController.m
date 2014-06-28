@@ -21,21 +21,13 @@
     NSInteger sections;
 }
 
-@property (strong, nonatomic) UIBarButtonItem *signOutButton;
-@property (strong, nonatomic) UIBarButtonItem *composeButton;
 @property (nonatomic, strong) TweetTableViewCell *prototypeCell;
-
-- (void)signOut;
-- (void)composeTweet;
-- (void)fetchData:(id)sender;
-- (void)finishFetching:(id)sender;
 
 @end
 
 @implementation TimelineTableViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -44,14 +36,7 @@
     // set sections to 0 while loading
     sections = 0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    // setup the navigation bar
-    self.navigationItem.title = @"Home";
-    self.signOutButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStyleDone target:self action:@selector(signOut)];
-    self.composeButton = [[UIBarButtonItem alloc] initWithTitle:@"Compose" style:UIBarButtonItemStyleDone target:self action:@selector(composeTweet)];
-    self.navigationItem.leftBarButtonItem = self.signOutButton;
-    self.navigationItem.rightBarButtonItem = self.composeButton;
-    
+
     // setup referesh controller
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(fetchData:) forControlEvents:UIControlEventValueChanged];
@@ -65,6 +50,14 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    // setup the navigation bar
+    self.parentViewController.navigationItem.title = @"Home";
+    UIBarButtonItem *signOutButton = [[UIBarButtonItem alloc] initWithTitle:@"Panel" style:UIBarButtonItemStyleDone target:self.delegate action:@selector(togglePanel)];
+    UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] initWithTitle:@"Compose" style:UIBarButtonItemStyleDone target:self action:@selector(composeTweet)];
+    self.parentViewController.navigationItem.leftBarButtonItem = signOutButton;
+    self.parentViewController.navigationItem.rightBarButtonItem = composeButton;
+
     [self.tableView reloadData];
 }
 

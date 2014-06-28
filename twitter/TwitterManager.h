@@ -33,7 +33,6 @@
 - (RACSignal *)retweet:(Tweet *)tweet;
 - (RACSignal *)favorite:(Tweet *)tweet;
 
-
 + (TwitterManager *)instance;
 
 @end

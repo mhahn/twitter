@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MainViewController.h"
 #import "LoginViewController.h"
 #import "TimelineTableViewController.h"
 #import "TwitterManager.h"
@@ -18,6 +19,7 @@
 
     UIColor *twitterBlue = [UIColor colorWithRed:0.333 green:0.675 blue:0.933 alpha:1]; /*#55acee*/
     UIColor *twitterWhite = [UIColor colorWithRed:0.961 green:0.973 blue:0.98 alpha:1]; /*#f5f8fa*/
+    
     [[UINavigationBar appearance] setBarTintColor:twitterBlue];
     [[UINavigationBar appearance] setTintColor:twitterWhite];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:twitterWhite, NSForegroundColorAttributeName, twitterWhite, NSBackgroundColorAttributeName, nil]];
@@ -27,13 +29,14 @@
     // setup views
     UIViewController *vc = nil;
     if ([[TwitterManager instance] isLoggedIn]) {
-        vc = [[TimelineTableViewController alloc] init];
+        vc = [[MainViewController alloc] init];
+        TimelineTableViewController *timelineViewController = [[TimelineTableViewController alloc] init];
+        [(MainViewController *)vc setContentViewController:timelineViewController];
     } else {
         vc = [[LoginViewController alloc] init];
     }
     
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
-    
     self.window.rootViewController = nvc;
     
     self.window.backgroundColor = [UIColor whiteColor];

@@ -10,13 +10,13 @@
 #import "Tweet.h"
 #import "TwitterClient.h"
 #import "TwitterManager.h"
-#import "TweetSet.h"
+#import "TweetSortedSet.h"
 
 @interface TwitterManager()
 
 @property (nonatomic, strong) User *user;
 @property (strong, nonatomic) TwitterClient *client;
-@property (strong, nonatomic) TweetSet *tweetSet;
+@property (strong, nonatomic) TweetSortedSet *tweetSet;
 
 - (RACSignal *)fetchCurrentUser;
 
@@ -28,7 +28,7 @@
     self = [super init];
     if (self) {
         _client = [[TwitterClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.twitter.com/"] consumerKey:consumerKey consumerSecret:consumerSecret];
-        _tweetSet = [[TweetSet alloc] init];
+        _tweetSet = [[TweetSortedSet alloc] init];
     }
     return self;
 }

@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Michael Hahn. All rights reserved.
 //
 
-#import "TweetSet.h"
+#import "TweetSortedSet.h"
 #import "Tweet.h"
 
-@interface TweetSet()
+@interface TweetSortedSet()
 
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) NSMutableSet *tweetIds;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation TweetSet
+@implementation TweetSortedSet
 
 - (id)init {
     self = [super init];

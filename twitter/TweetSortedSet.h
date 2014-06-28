@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Tweet.h"
 
-@interface TweetSet : NSObject
+@interface TweetSortedSet : NSObject
 
 - (id)initWithTweets:(NSArray *)tweets;
 - (BOOL)addTweetToSet:(Tweet *)tweet;

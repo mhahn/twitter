@@ -1,8 +1,8 @@
 //
-//  TimelineTableViewController.h
+//  UIViewController+ContentViewControllerDelegate.h
 //  twitter
 //
-//  Created by mhahn on 6/24/14.
+//  Created by mhahn on 6/28/14.
 //  Copyright (c) 2014 Michael Hahn. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 #import "ContentViewControllerDelegate.h"
 
-@interface TimelineTableViewController : UITableViewController
+@interface UIViewController (ContentViewControllerDelegate)
 
 @property (nonatomic, assign) id<ContentViewControllerDelegate> delegate;
 
