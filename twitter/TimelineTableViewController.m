@@ -52,11 +52,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     // setup the navigation bar
-    self.parentViewController.navigationItem.title = @"Home";
-    UIBarButtonItem *signOutButton = [[UIBarButtonItem alloc] initWithTitle:@"Panel" style:UIBarButtonItemStyleDone target:self.delegate action:@selector(togglePanel)];
+    self.navigationItem.title = @"Home";
+    UIBarButtonItem *panelButton = [[UIBarButtonItem alloc] initWithTitle:@"Panel" style:UIBarButtonItemStyleDone target:self.delegate action:@selector(togglePanel)];
     UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] initWithTitle:@"Compose" style:UIBarButtonItemStyleDone target:self action:@selector(composeTweet)];
-    self.parentViewController.navigationItem.leftBarButtonItem = signOutButton;
-    self.parentViewController.navigationItem.rightBarButtonItem = composeButton;
+    self.navigationItem.leftBarButtonItem = panelButton;
+    self.navigationItem.rightBarButtonItem = composeButton;
 
     [self.tableView reloadData];
 }
@@ -77,12 +77,6 @@
     TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
     cell.tweet = [[TwitterManager instance] getTweetAtIndex:indexPath.row];
     return cell;
-}
-
-- (void)signOut {
-    [[TwitterManager instance] signOut];
-    NSArray *viewControllers = [NSArray arrayWithObject:[[LoginViewController alloc] init]];
-    [self.navigationController setViewControllers:viewControllers animated:YES];
 }
 
 - (void)composeTweet {

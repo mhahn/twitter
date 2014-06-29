@@ -20,6 +20,7 @@
 
 @interface MainViewController : UIViewController <UIGestureRecognizerDelegate>
 
+- (id)initWithContentViewController:(UIViewController *)contentViewController;
 - (void)setContentViewController:(UIViewController *)contentViewController;
 
 @end

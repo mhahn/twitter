@@ -8,6 +8,7 @@
 #import <ReactiveCocoa.h>
 
 #import "LoginViewController.h"
+#import "MainViewController.h"
 #import "TimelineTableViewController.h"
 #import "TwitterManager.h"
 
@@ -42,9 +43,8 @@
     [loginCommand.executionSignals subscribeNext:^(RACSignal *loginSignal) {
         [loginSignal subscribeCompleted:^{
             
-            NSArray *viewControllers = [NSArray arrayWithObject:[[TimelineTableViewController alloc] init]];
-            [self.navigationController setNavigationBarHidden:NO];
-            [self.navigationController setViewControllers:viewControllers animated:NO];
+            TimelineTableViewController *vc = [[TimelineTableViewController alloc] init];
+            [self presentViewController:[[MainViewController alloc] initWithContentViewController:vc] animated:NO completion:nil];
 
         }];
     }];

@@ -16,7 +16,7 @@
 
 @interface MainViewController () <ContentViewControllerDelegate>
 
-@property (nonatomic, strong) UIViewController *contentViewController;
+@property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) UIViewController *panelTableViewController;
 @property (nonatomic, assign) BOOL displayingPanel;
 @property (nonatomic, assign) BOOL showPanel;
@@ -25,10 +25,10 @@
 
 @implementation MainViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)initWithContentViewController:(UIViewController *)contentViewController {
+    self = [super init];
     if (self) {
-        // Custom initialization
+        [self setContentViewController:contentViewController];
     }
     return self;
 }
@@ -40,17 +40,18 @@
     [panRecognizer setMaximumNumberOfTouches:1];
     [panRecognizer setMinimumNumberOfTouches:1];
     [panRecognizer setDelegate:self];
-    [_contentViewController.view addGestureRecognizer:panRecognizer];
+    [_navigationController.view addGestureRecognizer:panRecognizer];
     
 }
 
 - (void)setContentViewController:(UIViewController *)contentViewController {
-    _contentViewController = contentViewController;
-    _contentViewController.delegate = self;
+    contentViewController.delegate = self;
+    _navigationController = [[UINavigationController alloc] initWithRootViewController:contentViewController];
     
-    [self.view addSubview:_contentViewController.view];
-    [self addChildViewController:_contentViewController];
-    [_contentViewController didMoveToParentViewController:self];
+    [_navigationController willMoveToParentViewController:self];
+    [self.view addSubview:_navigationController.view];
+    [self addChildViewController:_navigationController];
+    [_navigationController didMoveToParentViewController:self];
 }
 
 - (UIView *)getPanelView {
@@ -74,7 +75,7 @@
     UIView *childView = [self getPanelView];
     [self.view sendSubviewToBack:childView];
     [UIView animateKeyframesWithDuration:SLIDE_DURATION delay:0 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
-        _contentViewController.view.frame = CGRectMake(self.view.frame.size.width - PANEL_WIDTH, 0, self.view.frame.size.width, self.view.frame.size.height);
+        _navigationController.view.frame = CGRectMake(self.view.frame.size.width - PANEL_WIDTH, 0, self.view.frame.size.width, self.view.frame.size.height);
     } completion:^(BOOL finished) {
         if (finished) {
             _displayingPanel = YES;
@@ -84,7 +85,7 @@
 
 - (void)movePanelToOriginalPosition {
     [UIView animateKeyframesWithDuration:SLIDE_DURATION delay:0 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
-        _contentViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        _navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         _displayingPanel = NO;
     } completion:^(BOOL finished) {
         if (finished) {
@@ -136,9 +137,9 @@
             BOOL showPanel = YES;
             
             if (velocity.x > 0 && velocity.x < 100) {
-                showPanel = abs([sender view].center.x - _contentViewController.view.frame.size.width/2) > _contentViewController.view.frame.size.width/2;
+                showPanel = abs([sender view].center.x - _navigationController.view.frame.size.width/2) > _navigationController.view.frame.size.width/2;
             } else if (velocity.x < 0 && velocity.x > -100) {
-                showPanel = abs([sender view].center.x - _contentViewController.view.frame.size.width/2) < _contentViewController.view.frame.size.width/2;
+                showPanel = abs([sender view].center.x - _navigationController.view.frame.size.width/2) < _navigationController.view.frame.size.width/2;
             }
             
             if (showPanel && _displayingPanel) {

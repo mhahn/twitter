@@ -6,111 +6,84 @@
 //  Copyright (c) 2014 Michael Hahn. All rights reserved.
 //
 
+#import "LoginViewController.h"
+#import "PanelHeaderView.h"
+#import "PanelLink.h"
+#import "PanelLinkTableViewCell.h"
 #import "PanelTableViewController.h"
+#import "TwitterManager.h"
 
-@interface PanelTableViewController ()
+@interface PanelTableViewController () {
+    NSArray *panelLinks;
+}
 
 @end
 
 @implementation PanelTableViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    UINib *panelHeader = [UINib nibWithNibName:@"PanelHeaderView" bundle:nil];
+    [self.tableView registerNib:panelHeader forHeaderFooterViewReuseIdentifier:@"PanelHeader"];
+    UINib *linkCell = [UINib nibWithNibName:@"PanelLinkTableViewCell" bundle:nil];
+    [self.tableView registerNib:linkCell forCellReuseIdentifier:@"LinkCell"];
+    [self.tableView setBackgroundColor:[UIColor blackColor]];
+    
+    panelLinks = @[
+        [[PanelLink alloc] initWithDictionary:@{@"label": @"Sign Out", @"selector": @"signOut"}],
+    ];
+    
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [panelLinks count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = nil;
+    cell = [tableView dequeueReusableCellWithIdentifier:@"LinkCell" forIndexPath:indexPath];
+    [(PanelLinkTableViewCell *)cell setLink:panelLinks[indexPath.row]];
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50.f;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 100.f;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    PanelHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"PanelHeader"];
+    header.user = [[TwitterManager instance] getCurrentUser];
+    return header;
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
-/*
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PanelLink *panelLink = panelLinks[indexPath.row];
+    NSLog(@"selector: %@", panelLink.selectorString);
+    [self performSelectorOnMainThread:NSSelectorFromString(panelLink.selectorString) withObject:self waitUntilDone:NO];
 }
-*/
+
+
+- (void)signOut {
+    NSLog(@"%@", self.view.superview);
+    [[TwitterManager instance] signOut];
+    [self presentViewController:[[LoginViewController alloc] init] animated:NO completion:nil];
+}
 
 @end

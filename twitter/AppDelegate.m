@@ -24,20 +24,15 @@
     [[UINavigationBar appearance] setTintColor:twitterWhite];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:twitterWhite, NSForegroundColorAttributeName, twitterWhite, NSBackgroundColorAttributeName, nil]];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     // setup views
     UIViewController *vc = nil;
     if ([[TwitterManager instance] isLoggedIn]) {
-        vc = [[MainViewController alloc] init];
-        TimelineTableViewController *timelineViewController = [[TimelineTableViewController alloc] init];
-        [(MainViewController *)vc setContentViewController:timelineViewController];
+        vc = [[MainViewController alloc] initWithContentViewController:[[TimelineTableViewController alloc] init]];
     } else {
         vc = [[LoginViewController alloc] init];
-    }
-    
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = nvc;
+    }    
+    self.window.rootViewController = vc;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
