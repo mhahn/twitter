@@ -17,6 +17,7 @@
 - (void)authorizeClient:(NSURL *)url;
 - (RACSignal *)login;
 - (RACSignal *)homeTimeline;
+- (RACSignal *)mentions;
 - (RACSignal *)sendTweet:(NSString *)tweetContent inReplyTo:(NSString *)tweetId;
 - (RACSignal *)retweet:(NSString *)tweetId;
 - (RACSignal *)favorite:(NSString *)tweetId;

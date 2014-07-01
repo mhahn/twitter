@@ -27,8 +27,12 @@
 - (Tweet *)getTweetAtIndex:(NSUInteger)index;
 - (NSArray *)getCurrentTweets;
 
+- (Tweet *)getMentionAtIndex:(NSUInteger)index;
+- (NSArray *)getCurrentMentions;
+
 - (RACSignal *)login;
 - (RACSignal *)fetchTweetsFromTimeline;
+- (RACSignal *)fetchMentions;
 - (RACSignal *)sendTweet:(NSString *)tweetContent inReplyTo:(Tweet *)tweet;
 - (RACSignal *)retweet:(Tweet *)tweet;
 - (RACSignal *)favorite:(Tweet *)tweet;

@@ -17,6 +17,7 @@
 @property (nonatomic, strong) User *user;
 @property (strong, nonatomic) TwitterClient *client;
 @property (strong, nonatomic) TweetSortedSet *tweetSet;
+@property (strong, nonatomic) TweetSortedSet *mentionSet;
 
 - (RACSignal *)fetchCurrentUser;
 
@@ -27,8 +28,9 @@
 - (id)initWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret {
     self = [super init];
     if (self) {
-        _client = [[TwitterClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.twitter.com/"] consumerKey:consumerKey consumerSecret:consumerSecret];
-        _tweetSet = [[TweetSortedSet alloc] init];
+        self.client = [[TwitterClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.twitter.com/"] consumerKey:consumerKey consumerSecret:consumerSecret];
+        self.tweetSet = [[TweetSortedSet alloc] init];
+        self.mentionSet = [[TweetSortedSet alloc] init];
     }
     return self;
 }
@@ -53,6 +55,14 @@
 
 - (NSArray *)getCurrentTweets {
     return [self.tweetSet getTweets];
+}
+
+- (Tweet *)getMentionAtIndex:(NSUInteger)index {
+    return [self.mentionSet getTweetAtIndex:index];
+}
+
+- (NSArray *)getCurrentMentions {
+    return [self.mentionSet getTweets];
 }
 
 - (RACSignal *)login {
@@ -99,6 +109,29 @@
                 [subscriber sendError:jsonError];
             } else {
                 [self.tweetSet addTweetsToSet:tweets];
+                [subscriber sendNext:nil];
+                [subscriber sendCompleted];
+            }
+            
+        } error:^(NSError *error) {
+            [subscriber sendError:error];
+        }];
+        
+        return [[RACDisposable alloc] init];
+    }];
+}
+
+- (RACSignal *)fetchMentions {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        [[self.client mentions] subscribeNext:^(id responseObject) {
+            NSError *jsonError = nil;
+            NSArray *tweets = [MTLJSONAdapter modelsOfClass:[Tweet class] fromJSONArray:responseObject error:&jsonError];
+            
+            if (jsonError) {
+                [subscriber sendError:jsonError];
+            } else {
+                [self.mentionSet addTweetsToSet:tweets];
                 [subscriber sendNext:nil];
                 [subscriber sendCompleted];
             }

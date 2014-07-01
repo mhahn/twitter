@@ -121,6 +121,18 @@
     }];
 }
 
+- (RACSignal *)mentions {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [self GET:@"1.1/statuses/mentions.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [subscriber sendNext:responseObject];
+            [subscriber sendCompleted];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [subscriber sendError:error];
+        }];
+        return [[RACDisposable alloc] init];
+    }];
+}
+
 - (RACSignal *)sendTweet:(NSString *)tweetContent inReplyTo:(NSString *)tweetId {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:@{@"status": tweetContent}];
