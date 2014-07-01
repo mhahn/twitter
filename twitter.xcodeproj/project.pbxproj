@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		3D0C4CA48784457A93761A1D /* libPods-twitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4001D984E24E1FA9A5E423 /* libPods-twitter.a */; };
+		BF0AFBDF196376D600173EAA /* PanelProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0AFBDD196376D600173EAA /* PanelProfileInfoTableViewCell.m */; };
+		BF0AFBE0196376D600173EAA /* PanelProfileInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0AFBDE196376D600173EAA /* PanelProfileInfoTableViewCell.xib */; };
 		BF5B3F81195F3A0400793820 /* UIViewController+ContentViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5B3F80195F3A0400793820 /* UIViewController+ContentViewControllerDelegate.m */; };
 		BF5B3F8F195F4F8900793820 /* PanelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5B3F8D195F4F8900793820 /* PanelTableViewController.m */; };
 		BF5B3F90195F4F8900793820 /* PanelTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF5B3F8E195F4F8900793820 /* PanelTableViewController.xib */; };
 		BF5B3F99195F737100793820 /* PanelLinkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5B3F97195F737100793820 /* PanelLinkTableViewCell.m */; };
 		BF5B3F9A195F737100793820 /* PanelLinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF5B3F98195F737100793820 /* PanelLinkTableViewCell.xib */; };
 		BF5B3F9D195F783000793820 /* PanelLink.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5B3F9C195F783000793820 /* PanelLink.m */; };
-		BF5B3FA4195F8C7400793820 /* PanelHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5B3FA2195F8C7400793820 /* PanelHeaderView.m */; };
-		BF5B3FA5195F8C7400793820 /* PanelHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF5B3FA3195F8C7400793820 /* PanelHeaderView.xib */; };
 		BFB71018195BB24B006B23FC /* TweetSortedSet.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB71017195BB24B006B23FC /* TweetSortedSet.m */; };
 		BFBB517A1958DE2700A625CE /* TwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB51791958DE2700A625CE /* TwitterClient.m */; };
 		BFBB517F1958E09800A625CE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBB517D1958E09800A625CE /* LoginViewController.m */; };
@@ -60,6 +60,9 @@
 
 /* Begin PBXFileReference section */
 		8C4001D984E24E1FA9A5E423 /* libPods-twitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-twitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF0AFBDC196376D600173EAA /* PanelProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanelProfileInfoTableViewCell.h; sourceTree = "<group>"; };
+		BF0AFBDD196376D600173EAA /* PanelProfileInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanelProfileInfoTableViewCell.m; sourceTree = "<group>"; };
+		BF0AFBDE196376D600173EAA /* PanelProfileInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PanelProfileInfoTableViewCell.xib; sourceTree = "<group>"; };
 		BF5B3F7F195F3A0400793820 /* UIViewController+ContentViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ContentViewControllerDelegate.h"; sourceTree = "<group>"; };
 		BF5B3F80195F3A0400793820 /* UIViewController+ContentViewControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ContentViewControllerDelegate.m"; sourceTree = "<group>"; };
 		BF5B3F8C195F4F8900793820 /* PanelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanelTableViewController.h; sourceTree = "<group>"; };
@@ -70,9 +73,6 @@
 		BF5B3F98195F737100793820 /* PanelLinkTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PanelLinkTableViewCell.xib; sourceTree = "<group>"; };
 		BF5B3F9B195F783000793820 /* PanelLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanelLink.h; sourceTree = "<group>"; };
 		BF5B3F9C195F783000793820 /* PanelLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanelLink.m; sourceTree = "<group>"; };
-		BF5B3FA1195F8C7400793820 /* PanelHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanelHeaderView.h; sourceTree = "<group>"; };
-		BF5B3FA2195F8C7400793820 /* PanelHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanelHeaderView.m; sourceTree = "<group>"; };
-		BF5B3FA3195F8C7400793820 /* PanelHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PanelHeaderView.xib; sourceTree = "<group>"; };
 		BFB71016195BB24B006B23FC /* TweetSortedSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetSortedSet.h; sourceTree = "<group>"; };
 		BFB71017195BB24B006B23FC /* TweetSortedSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetSortedSet.m; sourceTree = "<group>"; };
 		BFBB51781958DE2700A625CE /* TwitterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterClient.h; sourceTree = "<group>"; };
@@ -183,9 +183,9 @@
 				BF5B3F96195F737100793820 /* PanelLinkTableViewCell.h */,
 				BF5B3F97195F737100793820 /* PanelLinkTableViewCell.m */,
 				BF5B3F98195F737100793820 /* PanelLinkTableViewCell.xib */,
-				BF5B3FA1195F8C7400793820 /* PanelHeaderView.h */,
-				BF5B3FA2195F8C7400793820 /* PanelHeaderView.m */,
-				BF5B3FA3195F8C7400793820 /* PanelHeaderView.xib */,
+				BF0AFBDC196376D600173EAA /* PanelProfileInfoTableViewCell.h */,
+				BF0AFBDD196376D600173EAA /* PanelProfileInfoTableViewCell.m */,
+				BF0AFBDE196376D600173EAA /* PanelProfileInfoTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -377,9 +377,9 @@
 			files = (
 				BFBB51911959FC9B00A625CE /* TweetTableViewCell.xib in Resources */,
 				BFBB51A6195A5C8500A625CE /* TweetViewController.xib in Resources */,
+				BF0AFBE0196376D600173EAA /* PanelProfileInfoTableViewCell.xib in Resources */,
 				BF5B3F9A195F737100793820 /* PanelLinkTableViewCell.xib in Resources */,
 				BFBB519A195A101300A625CE /* ComposeViewController.xib in Resources */,
-				BF5B3FA5195F8C7400793820 /* PanelHeaderView.xib in Resources */,
 				BFC8A66A1952A62100E9EC1F /* InfoPlist.strings in Resources */,
 				BF5B3F90195F4F8900793820 /* PanelTableViewController.xib in Resources */,
 				BFC8A6721952A62100E9EC1F /* Images.xcassets in Resources */,
@@ -451,8 +451,8 @@
 				BF5B3F99195F737100793820 /* PanelLinkTableViewCell.m in Sources */,
 				BFBB51A1195A428B00A625CE /* User.m in Sources */,
 				BFBB519E195A344800A625CE /* UIImageView+MHNetworking.m in Sources */,
+				BF0AFBDF196376D600173EAA /* PanelProfileInfoTableViewCell.m in Sources */,
 				BFBB517A1958DE2700A625CE /* TwitterClient.m in Sources */,
-				BF5B3FA4195F8C7400793820 /* PanelHeaderView.m in Sources */,
 				BFD8443C195D230900E1A50C /* MainViewController.m in Sources */,
 				BFC8A66C1952A62100E9EC1F /* main.m in Sources */,
 				BF5B3F8F195F4F8900793820 /* PanelTableViewController.m in Sources */,

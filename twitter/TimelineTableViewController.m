@@ -50,6 +50,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     // setup the navigation bar
     self.navigationItem.title = @"Home";
@@ -57,8 +58,6 @@
     UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] initWithTitle:@"Compose" style:UIBarButtonItemStyleDone target:self action:@selector(composeTweet)];
     self.navigationItem.leftBarButtonItem = panelButton;
     self.navigationItem.rightBarButtonItem = composeButton;
-
-    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -73,7 +72,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    NSLog(@"indexPath.row: %d", indexPath.row);
     TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
     cell.tweet = [[TwitterManager instance] getTweetAtIndex:indexPath.row];
     return cell;
@@ -123,7 +122,6 @@
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewAutomaticDimension;
 }
-
 
 #pragma mark - Table view delegate
 

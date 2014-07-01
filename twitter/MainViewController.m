@@ -47,6 +47,7 @@
 - (void)setContentViewController:(UIViewController *)contentViewController {
     contentViewController.delegate = self;
     _navigationController = [[UINavigationController alloc] initWithRootViewController:contentViewController];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     [_navigationController willMoveToParentViewController:self];
     [self.view addSubview:_navigationController.view];

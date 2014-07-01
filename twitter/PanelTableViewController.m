@@ -7,9 +7,9 @@
 //
 
 #import "LoginViewController.h"
-#import "PanelHeaderView.h"
 #import "PanelLink.h"
 #import "PanelLinkTableViewCell.h"
+#import "PanelProfileInfoTableViewCell.h"
 #import "PanelTableViewController.h"
 #import "TwitterManager.h"
 
@@ -27,14 +27,18 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-    UINib *panelHeader = [UINib nibWithNibName:@"PanelHeaderView" bundle:nil];
-    [self.tableView registerNib:panelHeader forHeaderFooterViewReuseIdentifier:@"PanelHeader"];
+
+    UINib *headerCell = [UINib nibWithNibName:@"PanelProfileInfoTableViewCell" bundle:nil];
+    [self.tableView registerNib:headerCell forCellReuseIdentifier:@"HeaderCell"];
     UINib *linkCell = [UINib nibWithNibName:@"PanelLinkTableViewCell" bundle:nil];
     [self.tableView registerNib:linkCell forCellReuseIdentifier:@"LinkCell"];
     [self.tableView setBackgroundColor:[UIColor blackColor]];
     
     panelLinks = @[
+        [[PanelLink alloc] initWithDictionary:@{@"label": @"Profile", @"selector": @"goToProfile"}],
+        [[PanelLink alloc] initWithDictionary:@{@"label": @"Profile", @"selector": @"goToProfile"}],
+        [[PanelLink alloc] initWithDictionary:@{@"label": @"Timeline", @"selector": @"goToTimeline"}],
+        [[PanelLink alloc] initWithDictionary:@{@"label": @"Mentions", @"selector": @"goToMentions"}],
         [[PanelLink alloc] initWithDictionary:@{@"label": @"Sign Out", @"selector": @"signOut"}],
     ];
     
@@ -46,29 +50,25 @@
     return [panelLinks count];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = nil;
-    cell = [tableView dequeueReusableCellWithIdentifier:@"LinkCell" forIndexPath:indexPath];
-    [(PanelLinkTableViewCell *)cell setLink:panelLinks[indexPath.row]];
+    if (indexPath.row == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell" forIndexPath:indexPath];
+        [(PanelProfileInfoTableViewCell *) cell setUser:[[TwitterManager instance] getCurrentUser]];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"LinkCell" forIndexPath:indexPath];
+        [(PanelLinkTableViewCell *)cell setLink:panelLinks[indexPath.row]];
+    }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50.f;
+    if (indexPath.row == 0) {
+        return 100.f;
+    } else {
+        return 50.f;
+    }
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 100.f;
-}
-
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    PanelHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"PanelHeader"];
-    header.user = [[TwitterManager instance] getCurrentUser];
-    return header;
-}
-
 
 #pragma mark - Table view delegate
 
@@ -83,7 +83,7 @@
 - (void)signOut {
     NSLog(@"%@", self.view.superview);
     [[TwitterManager instance] signOut];
-    [self presentViewController:[[LoginViewController alloc] init] animated:NO completion:nil];
+    [self presentViewController:[[LoginViewController alloc] init] animated:YES completion:nil];
 }
 
 @end
