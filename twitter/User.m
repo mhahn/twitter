@@ -16,11 +16,26 @@
         @"userName": @"name",
         @"screenName": @"screen_name",
         @"userProfilePicture": @"profile_image_url",
+        @"userProfilePictureLarge": @"profile_image_url",
+        @"userProfileBackgroundImage": @"profile_banner_url",
+        @"numberOfFollowers": @"followers_count",
+        @"numberFollowing": @"following",
+        @"numberOfTweets": @"statuses_count",
     };
 }
 
 + (NSValueTransformer *)userProfilePictureJSONTransformer {
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
+}
+
++ (NSValueTransformer *)userProfileBackgroundImageJSONTransformer {
+    return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
+}
+
++ (NSValueTransformer *)userProfilePictureLargeJSONTransformer {
+    return [MTLValueTransformer transformerWithBlock:^NSString*(NSString *imageURL) {
+        return [NSURL URLWithString:[imageURL stringByReplacingOccurrencesOfString:@"normal" withString:@"bigger"]];
+    }];
 }
 
 @end
