@@ -17,6 +17,8 @@
 #import "Tweet.h"
 #import "TweetTableViewCell.h"
 #import "TweetViewController.h"
+#import "TweetsTableViewController.h"
+
 
 @interface ProfileTableViewController() {
     NSInteger sections;
@@ -53,21 +55,25 @@
  
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
+
     // setup nibs
     UINib *tweetCellNib = [UINib nibWithNibName:@"TweetTableViewCell" bundle:nil];
     [self.tableView registerNib:tweetCellNib forCellReuseIdentifier:@"TweetCell"];
     UINib *profileHeaderCellNib = [UINib nibWithNibName:@"ProfileHeaderTableViewCell" bundle:nil];
     [self.tableView registerNib:profileHeaderCellNib forCellReuseIdentifier:@"ProfileHeader"];
-    
-    // fetch the user based on the screen name
-    // fetch the tweets
-    // finish loading
+
     
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    if ([self.navigationController.viewControllers count] == 1) {
+        // setup the navigation bar
+        UIBarButtonItem *panelButton = [[UIBarButtonItem alloc] initWithTitle:@"Panel" style:UIBarButtonItemStyleDone target:self.delegate action:@selector(togglePanel)];
+        self.navigationItem.leftBarButtonItem = panelButton;
+    }
+    
 }
 
 #pragma mark - Table view data source

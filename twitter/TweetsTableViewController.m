@@ -93,7 +93,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(handleImagePushed)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:cell action:NSSelectorFromString(@"handleImagePushed")];
     [cell addGestureRecognizer:tap];
     cell.tweet = [self getTweetAtIndexPath:indexPath];
     cell.delegate = self;
