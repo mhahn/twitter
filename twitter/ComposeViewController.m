@@ -61,7 +61,7 @@
     [_profilePictureImage setImageWithURL:user.userProfilePicture withAnimationDuration:0.5];
     
     if (_tweet) {
-        self.tweetText.text = [NSString stringWithFormat:@"%@ ", _tweet.screenName];
+        self.tweetText.text = [NSString stringWithFormat:@"%@ ", _tweet.formattedScreenName];
     }
     
     // open the keyboard immediately

@@ -11,13 +11,15 @@
 
 #import "ComposeViewController.h"
 #import "LoginViewController.h"
+#import "ProfileImageSelectedDelegate.h"
+#import "ProfileTableViewController.h"
 #import "TweetsTableViewController.h"
 #import "TwitterManager.h"
 #import "Tweet.h"
 #import "TweetTableViewCell.h"
 #import "TweetViewController.h"
 
-@interface TweetsTableViewController () {
+@interface TweetsTableViewController () <ProfileImageSelectedDelegate> {
     NSInteger sections;
 }
 
@@ -89,10 +91,12 @@
     }
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(handleImagePushed)];
+    [cell addGestureRecognizer:tap];
     cell.tweet = [self getTweetAtIndexPath:indexPath];
+    cell.delegate = self;
     return cell;
 }
 
@@ -187,6 +191,11 @@
         default:
             break;
     }
+}
+
+- (void)didSelectProfileImage:(NSString *)screenName {
+    ProfileTableViewController *vc = [[ProfileTableViewController alloc] initWithScreenName:screenName];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

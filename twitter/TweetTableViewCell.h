@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
+#import "ProfileImageSelectedDelegate.h"
 
 @interface TweetTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) Tweet *tweet;
+@property (nonatomic, assign) id<ProfileImageSelectedDelegate> delegate;
+
 
 @end

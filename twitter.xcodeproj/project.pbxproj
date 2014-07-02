@@ -73,6 +73,7 @@
 		BF0AFBE619638DA800173EAA /* ProfileHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileHeaderTableViewCell.h; sourceTree = "<group>"; };
 		BF0AFBE719638DA800173EAA /* ProfileHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileHeaderTableViewCell.m; sourceTree = "<group>"; };
 		BF0AFBE819638DA800173EAA /* ProfileHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		BF0AFBEB19639B6A00173EAA /* ProfileImageSelectedDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileImageSelectedDelegate.h; sourceTree = "<group>"; };
 		BF5B3F7F195F3A0400793820 /* UIViewController+ContentViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ContentViewControllerDelegate.h"; sourceTree = "<group>"; };
 		BF5B3F80195F3A0400793820 /* UIViewController+ContentViewControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ContentViewControllerDelegate.m"; sourceTree = "<group>"; };
 		BF5B3F8C195F4F8900793820 /* PanelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanelTableViewController.h; sourceTree = "<group>"; };
@@ -165,7 +166,6 @@
 				BFBB5196195A101300A625CE /* ComposeViewController.h */,
 				BFBB5197195A101300A625CE /* ComposeViewController.m */,
 				BFBB5198195A101300A625CE /* ComposeViewController.xib */,
-				BFD84445195D314E00E1A50C /* ContentViewControllerDelegate.h */,
 				BFBB517C1958E09800A625CE /* LoginViewController.h */,
 				BFBB517D1958E09800A625CE /* LoginViewController.m */,
 				BFBB517E1958E09800A625CE /* LoginViewController.xib */,
@@ -273,6 +273,8 @@
 				BFC8A66F1952A62100E9EC1F /* AppDelegate.m */,
 				BFBB5181195910CF00A625CE /* NSURL+dictionaryFromQueryString.h */,
 				BFBB5182195910CF00A625CE /* NSURL+dictionaryFromQueryString.m */,
+				BFD84445195D314E00E1A50C /* ContentViewControllerDelegate.h */,
+				BF0AFBEB19639B6A00173EAA /* ProfileImageSelectedDelegate.h */,
 				BFC8A6711952A62100E9EC1F /* Images.xcassets */,
 				BFC8A6661952A62100E9EC1F /* Supporting Files */,
 				BFBB51781958DE2700A625CE /* TwitterClient.h */,

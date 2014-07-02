@@ -24,13 +24,14 @@
         @"tweetId": @"id_str",
         @"userName": @"user.name",
         @"screenName": @"user.screen_name",
+        @"formattedScreenName": @"user.screen_name",
         @"userProfilePicture": @"user.profile_image_url",
         @"retweetsCount": @"retweet_count",
         @"favoritesCount": @"favorite_count",
     };
 }
 
-+ (NSValueTransformer *)screenNameJSONTransformer {
++ (NSValueTransformer *)formattedScreenNameJSONTransformer {
     return [MTLValueTransformer reversibleTransformerWithBlock:^NSString *(NSString *str) {
         return [NSString stringWithFormat:@"@%@", str];
     }];

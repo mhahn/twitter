@@ -38,7 +38,7 @@
     self.navigationItem.title = @"Tweet";
     _tweetTextLabel.text = _tweet.text;
     _userNameLabel.text = _tweet.userName;
-    _screenNameLabel.text = _tweet.screenName;
+    _screenNameLabel.text = _tweet.formattedScreenName;
     _createdAtLabel.text = _tweet.createdAt;
     _retweetsCountLabel.text = [NSString stringWithFormat:@"%@", _tweet.retweetsCount];
     _favoritesCountLabel.text = [NSString stringWithFormat:@"%@", _tweet.favoritesCount];

@@ -35,9 +35,13 @@
     _tweet = tweet;
     _tweetText.text = tweet.text;
     _userNameLabel.text = tweet.userName;
-    _screenNameLabel.text = tweet.screenName;
+    _screenNameLabel.text = tweet.formattedScreenName;
     _createdAtLabel.text = tweet.prettyCreatedAt;
     [_profilePictureImage setImageWithURL:tweet.userProfilePicture withAnimationDuration:0.5];
+}
+
+- (void)handleImagePushed {
+    [_delegate didSelectProfileImage:self.tweet.screenName];
 }
 
 @end

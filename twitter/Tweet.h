@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *createdAt;
 @property (nonatomic, strong) NSString *tweetId;
 @property (nonatomic, strong) NSString *userName;
+@property (nonatomic, strong) NSString *formattedScreenName;
 @property (nonatomic, strong) NSString *screenName;
 @property (nonatomic, strong) NSURL *userProfilePicture;
 @property (nonatomic, strong) NSString *favoritesCount;
