@@ -10,8 +10,14 @@
 
 #import "ContentViewControllerDelegate.h"
 
-@interface TimelineTableViewController : UITableViewController
+typedef NS_ENUM(NSUInteger, TweetsTableViewControllerType) {
+    TweetsTableViewControllerMentions = 1,
+    TweetsTableViewControllerTimeline = 2,
+};
 
+@interface TweetsTableViewController : UITableViewController
+
+- (id)initWithTypeOfController:(TweetsTableViewControllerType)controllerType;
 @property (nonatomic, assign) id<ContentViewControllerDelegate> delegate;
 
 @end

@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "LoginViewController.h"
-#import "TimelineTableViewController.h"
+#import "TweetsTableViewController.h"
 #import "TwitterManager.h"
 
 @implementation AppDelegate
@@ -28,7 +28,7 @@
     // setup views
     UIViewController *vc = nil;
     if ([[TwitterManager instance] isLoggedIn]) {
-        vc = [[MainViewController alloc] initWithContentViewController:[[TimelineTableViewController alloc] init]];
+        vc = [[MainViewController alloc] initWithContentViewController:[[TweetsTableViewController alloc] initWithTypeOfController:TweetsTableViewControllerTimeline]];
     } else {
         vc = [[LoginViewController alloc] init];
     }    

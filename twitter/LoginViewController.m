@@ -9,7 +9,7 @@
 
 #import "LoginViewController.h"
 #import "MainViewController.h"
-#import "TimelineTableViewController.h"
+#import "TweetsTableViewController.h"
 #import "TwitterManager.h"
 
 @interface LoginViewController ()
@@ -43,7 +43,7 @@
     [loginCommand.executionSignals subscribeNext:^(RACSignal *loginSignal) {
         [loginSignal subscribeCompleted:^{
             
-            TimelineTableViewController *vc = [[TimelineTableViewController alloc] init];
+            TweetsTableViewController *vc = [[TweetsTableViewController alloc] initWithTypeOfController:TweetsTableViewControllerTimeline];
             [self presentViewController:[[MainViewController alloc] initWithContentViewController:vc] animated:NO completion:nil];
 
         }];

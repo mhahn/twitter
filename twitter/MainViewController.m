@@ -9,7 +9,7 @@
 #import "UIViewController+ContentViewControllerDelegate.h"
 #import "MainViewController.h"
 #import "PanelTableViewController.h"
-#import "TimelineTableViewController.h"
+#import "TweetsTableViewController.h"
 
 #define SLIDE_DURATION .25
 #define PANEL_WIDTH 100
@@ -28,28 +28,38 @@
 - (id)initWithContentViewController:(UIViewController *)contentViewController {
     self = [super init];
     if (self) {
-        [self setContentViewController:contentViewController];
+        [self setContentViewController:contentViewController animated:NO];
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated {
+    if (animated) {
+        [self togglePanel];
+    }
+    
+    contentViewController.delegate = self;
+    _navigationController = [[UINavigationController alloc] initWithRootViewController:contentViewController];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(movePanel:)];
     [panRecognizer setMaximumNumberOfTouches:1];
     [panRecognizer setMinimumNumberOfTouches:1];
     [panRecognizer setDelegate:self];
     [_navigationController.view addGestureRecognizer:panRecognizer];
-    
-}
 
-- (void)setContentViewController:(UIViewController *)contentViewController {
-    contentViewController.delegate = self;
-    _navigationController = [[UINavigationController alloc] initWithRootViewController:contentViewController];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    
     [_navigationController willMoveToParentViewController:self];
+    
+    for (UIView *view in self.view.subviews) {
+        if (view.tag != 1) {
+            [view removeFromSuperview];
+        }
+    }
+    
     [self.view addSubview:_navigationController.view];
     [self addChildViewController:_navigationController];
     [_navigationController didMoveToParentViewController:self];
@@ -58,6 +68,7 @@
 - (UIView *)getPanelView {
     if (_panelTableViewController == nil) {
         _panelTableViewController = [[PanelTableViewController alloc] initWithNibName:@"PanelTableViewController" bundle:nil];
+        _panelTableViewController.view.tag = 1;
 // at some point i think i'll want this
 //        _leftPanelViewController.delegate = _contentViewController;
         

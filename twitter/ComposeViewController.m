@@ -10,7 +10,6 @@
 #import "TSMessage.h"
 
 #import "ComposeViewController.h"
-#import "TimelineTableViewController.h"
 #import "TwitterManager.h"
 #import "User.h"
 #import "Tweet.h"

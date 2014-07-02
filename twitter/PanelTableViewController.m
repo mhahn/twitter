@@ -7,10 +7,12 @@
 //
 
 #import "LoginViewController.h"
+#import "MainViewController.h"
 #import "PanelLink.h"
 #import "PanelLinkTableViewCell.h"
 #import "PanelProfileInfoTableViewCell.h"
 #import "PanelTableViewController.h"
+#import "TweetsTableViewController.h"
 #import "TwitterManager.h"
 
 @interface PanelTableViewController () {
@@ -81,9 +83,16 @@
 
 
 - (void)signOut {
-    NSLog(@"%@", self.view.superview);
     [[TwitterManager instance] signOut];
     [self presentViewController:[[LoginViewController alloc] init] animated:YES completion:nil];
+}
+
+- (void)goToMentions {
+    [(MainViewController *)self.parentViewController setContentViewController:[[TweetsTableViewController alloc] initWithTypeOfController:TweetsTableViewControllerMentions] animated:YES];
+}
+
+- (void)goToTimeline {
+    [(MainViewController *)self.parentViewController setContentViewController:[[TweetsTableViewController alloc] initWithTypeOfController:TweetsTableViewControllerTimeline] animated:YES];
 }
 
 @end

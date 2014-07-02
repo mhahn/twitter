@@ -123,7 +123,7 @@
 
 - (RACSignal *)mentions {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        [self GET:@"1.1/statuses/mentions.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self GET:@"1.1/statuses/mentions_timeline.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [subscriber sendNext:responseObject];
             [subscriber sendCompleted];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
