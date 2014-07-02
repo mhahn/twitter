@@ -32,10 +32,12 @@
 
 - (RACSignal *)login;
 - (RACSignal *)fetchTweetsFromTimeline;
+- (RACSignal *)fetchTweetsFromUserTimeline:(NSString *)screenName;
 - (RACSignal *)fetchMentions;
 - (RACSignal *)sendTweet:(NSString *)tweetContent inReplyTo:(Tweet *)tweet;
 - (RACSignal *)retweet:(Tweet *)tweet;
 - (RACSignal *)favorite:(Tweet *)tweet;
+- (RACSignal *)fetchUserInfo:(NSString *)screenName;
 
 + (TwitterManager *)instance;
 

@@ -16,12 +16,13 @@
 - (BOOL)isLoggedIn;
 - (void)authorizeClient:(NSURL *)url;
 - (RACSignal *)login;
+- (RACSignal *)userTimeline:(NSString *)screenName;
 - (RACSignal *)homeTimeline;
 - (RACSignal *)mentions;
 - (RACSignal *)sendTweet:(NSString *)tweetContent inReplyTo:(NSString *)tweetId;
 - (RACSignal *)retweet:(NSString *)tweetId;
 - (RACSignal *)favorite:(NSString *)tweetId;
-- (RACSignal *)userInfo;
-
+- (RACSignal *)authedUserInfo;
+- (RACSignal *)getUserInfo:(NSString *)screenName;
 
 @end

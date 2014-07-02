@@ -84,7 +84,7 @@
 - (RACSignal *)fetchCurrentUser {
     
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        [[self.client userInfo] subscribeNext:^(NSDictionary *responseObject) {
+        [[self.client authedUserInfo] subscribeNext:^(NSDictionary *responseObject) {
             NSError *jsonError = nil;
             User *user = [MTLJSONAdapter modelOfClass:[User class] fromJSONDictionary:responseObject error:&jsonError];
             self.user = user;
@@ -96,6 +96,20 @@
         return [[RACDisposable alloc] init];
     }];
     
+}
+
+- (RACSignal *)fetchUserInfo:(NSString *)screenName {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [[self.client getUserInfo:screenName] subscribeNext:^(NSArray *responseObject) {
+            NSError *jsonError = nil;
+            User *user = [MTLJSONAdapter modelOfClass:[User class] fromJSONDictionary:responseObject[0] error:&jsonError];
+            [subscriber sendNext:user];
+            [subscriber sendCompleted];
+        } error:^(NSError *error) {
+            [subscriber sendError:error];
+        }];
+        return [[RACDisposable alloc] init];
+    }];
 }
 
 - (RACSignal *)fetchTweetsFromTimeline {
@@ -110,6 +124,28 @@
             } else {
                 [self.tweetSet addTweetsToSet:tweets];
                 [subscriber sendNext:nil];
+                [subscriber sendCompleted];
+            }
+            
+        } error:^(NSError *error) {
+            [subscriber sendError:error];
+        }];
+        
+        return [[RACDisposable alloc] init];
+    }];
+}
+
+- (RACSignal *)fetchTweetsFromUserTimeline:(NSString *)screenName {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        [[self.client userTimeline:screenName] subscribeNext:^(id responseObject) {
+            NSError *jsonError = nil;
+            NSArray *tweets = [MTLJSONAdapter modelsOfClass:[Tweet class] fromJSONArray:responseObject error:&jsonError];
+            
+            if (jsonError) {
+                [subscriber sendError:jsonError];
+            } else {
+                [subscriber sendNext:tweets];
                 [subscriber sendCompleted];
             }
             

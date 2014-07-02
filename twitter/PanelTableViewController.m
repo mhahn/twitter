@@ -12,6 +12,7 @@
 #import "PanelLinkTableViewCell.h"
 #import "PanelProfileInfoTableViewCell.h"
 #import "PanelTableViewController.h"
+#import "ProfileTableViewController.h"
 #import "TweetsTableViewController.h"
 #import "TwitterManager.h"
 
@@ -93,6 +94,10 @@
 
 - (void)goToTimeline {
     [(MainViewController *)self.parentViewController setContentViewController:[[TweetsTableViewController alloc] initWithTypeOfController:TweetsTableViewControllerTimeline] animated:YES];
+}
+
+- (void)goToProfile {
+    [(MainViewController *)self.parentViewController setContentViewController:[[ProfileTableViewController alloc] initWithScreenName:[[TwitterManager instance] getCurrentUser].screenName] animated:YES];
 }
 
 @end

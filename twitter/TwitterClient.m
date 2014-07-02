@@ -109,6 +109,18 @@
     }];
 }
 
+- (RACSignal *)userTimeline:(NSString *)screenName {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [self GET:@"1.1/statuses/user_timeline.json" parameters:[[NSDictionary alloc] initWithObjectsAndKeys:screenName, @"screen_name", nil] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [subscriber sendNext:responseObject];
+            [subscriber sendCompleted];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [subscriber sendError:error];
+        }];
+        return [[RACDisposable alloc] init];
+    }];
+}
+
 - (RACSignal *)homeTimeline {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [self GET:@"1.1/statuses/home_timeline.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -175,9 +187,21 @@
     }];
 }
 
-- (RACSignal *)userInfo {
+- (RACSignal *)authedUserInfo {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [self GET:@"1.1/account/verify_credentials.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [subscriber sendNext:responseObject];
+            [subscriber sendCompleted];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [subscriber sendError:error];
+        }];
+        return [[RACDisposable alloc] init];
+    }];
+}
+
+- (RACSignal *)getUserInfo:(NSString *)screenName {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [self GET:@"1.1/users/lookup.json" parameters:[[NSDictionary alloc] initWithObjectsAndKeys:screenName,@"screen_name", nil] success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [subscriber sendNext:responseObject];
             [subscriber sendCompleted];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
